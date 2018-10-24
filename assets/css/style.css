@@ -1,0 +1,165 @@
+/*Generales*/
+*{
+    padding: 0%;
+    margin: 0%;
+}
+body{
+    background-color: wite;
+}
+a{
+    color: #660e24;
+    text-emphasis: size;
+}
+a:visited{
+    color: #660e24;
+}
+a:hover{
+    color: #c2c2c2;
+}
+
+#containergeneral{
+    width: 100%;
+    height: 40em;
+    background: white;
+    margin: 0px auto;
+}
+/*header*/
+#header{
+    background: #f0f0f0;
+}
+#texto{
+    width: 90%;
+}
+h1{
+    margin-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    justify-content: flex-end;
+}
+
+#logout{
+    float: right;
+    width: 4%;
+    margin-right: 4%;   
+}
+#texto, #logout{
+    display: inline-block;
+}
+
+/*menulateral*/
+#menulateral{
+    width: 15%;
+    min-height: 500px;
+    float: left;
+    margin: 0px auto;
+    border: solid 2px #f0f0f0;
+    color: white;  
+    box-shadow: -5px -1px 1px #ddd;
+}
+#menulateral ul{
+    list-style: none;
+    text-decoration: none;    
+    margin: 0px auto;
+    font-size: 105%;
+    font-weight: bold;
+}
+#menulateral ul li{
+    line-height: 3rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+#menulateral a{
+    text-decoration: none;
+    display: block;
+    padding-left: 20%;
+    transition: all 400ms;
+}
+#menulateral a:first-child {
+    border-bottom: 1px solid #f0f0f0;
+}
+#menulateral a:hover {
+    background: #660e24;
+}
+
+/*contenido*/
+#contenido{
+    width: 79%;
+    min-height: 500px;
+    float: right;
+    border-top:solid 2px #f0f0f0;
+    box-shadow: -25px -1px 15px #ddd;
+    padding: 20px;
+}
+#contenido h3{
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-align: center;
+    border-bottom: solid 1px #c2c2c2;
+    padding: .3rem;
+}
+
+
+/*footer*/
+#footer{
+    width: 98%;
+    background: white;
+    min-height: 2em;    
+    margin: 0px auto;
+    box-shadow: 0px 0px 0px gray;
+    
+}
+#footer p{
+    font-size: 120%;
+    font-weight: bold;
+    margin-left: 40%;
+    margin-top: 10px;
+}
+/*Pagina de Inicio de sesion*/
+.form-signin .mb-4{
+    margin-top: 10px;
+}
+.form-signin .form-label-group {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+.form-signin .btn {
+    margin-left: 20%;
+    margin-right: 20%;
+    float: right;
+    margin-bottom: 20px;
+}
+/*Especifico*/
+.agregar{    
+    float: right;
+}
+#central{
+    margin-top: 30px;
+}
+.curso{
+    width: 30%;
+    border: 1px solid #ccc;
+    box-shadow: 5px 0px 5px gray;
+    border-radius: 8px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.curso img{
+    width: 75%;
+    margin-bottom: 5%;
+}
+
+.curso h2{
+    font-size: 155%;
+}
+.curso .btn {
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    letter-spacing: 1px;
+    font-size: 24px;
+}
