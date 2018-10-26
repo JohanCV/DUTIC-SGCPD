@@ -89,5 +89,16 @@ class Usuario{
         return $result;
     }
 
+    public function listadocentes(){
+        $docenteslista = $this->db->query("SELECT * FROM usuarios");
+        return $docenteslista;
+    }
+    public function editar(){
+
+    }
+    public function eliminar(){
+
+    }
+
 }
 ?>

@@ -6,7 +6,7 @@ require_once 'config/parameter.php';
 require_once 'helpers/utils.php';
 require_once 'vistas/layout/cabecera.php';
 require_once 'vistas/layout/menulateral.php';
-
+require_once 'vistas/layout/contenido.php';
 //--contenido -->
 
 function show_error(){

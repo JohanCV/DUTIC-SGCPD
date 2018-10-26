@@ -20,11 +20,5 @@
                 
                 <button class="btn btn-lg btn-primary " type="submit">Iniciar Sesion</button>
 </form>
-<?php else: ?>
-    <div class="alert alert-success" role="alert">
-        <strong>Bienvenido <?= $_SESSION['identity']->nombre ?>
-            <?= $_SESSION['identity']->apellidos ?>
-        </strong>
 
-    </div>
 <?php endif; ?>
