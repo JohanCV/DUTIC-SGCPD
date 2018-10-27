@@ -19,14 +19,16 @@ class UsuarioController{
             $nombre=isset($_POST['nombre']) ? $_POST['nombre']:false;
             $apellidos=isset($_POST['apellidos'])?$_POST['apellidos']:false;
             $email=isset($_POST['email'])?$_POST['email']:false;
-            $dni=isset($_POST['dni'])?$_POST['dni']:false;    
+            $dni=isset($_POST['dni'])?$_POST['dni']:false;
+            $escuela=isset($_POST['escuela'])?$_POST['escuela']:false;
 
-            if($nombre && $apellidos && $email && $dni){
+            if($nombre && $apellidos && $email && $dni && $escuela){
                 $usuario = new Usuario();
                 $usuario->setNombre($nombre);
                 $usuario->setApellidos($apellidos);
                 $usuario->setEmail($email);
                 $usuario->setDnipassword($dni);
+                $usuario->setEscuela($escuela);
                 $save = $usuario->save();
                // var_dump($usuario);
                 if($save){
@@ -39,7 +41,8 @@ class UsuarioController{
             }   
         }else{
             $_SESSION['register'] = "fallido";            
-        }         header("Location:".base_url);
+        }
+        header("Location:".base_url.'usuariocontroller/listadocentes');
     }
     
     public function login(){
@@ -76,6 +79,10 @@ class UsuarioController{
         }
         //session_destroy();
         header("Location:".base_url);
+    }
+
+    public function  buscar(){
+
     }
 
     public function listadocentes(){

@@ -9,11 +9,13 @@
                     </strong></a></li>
 
             <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
-                    <i class="fas fa-plus-circle fa-1.5x"></i> CURSOS
+                    <i class="fas fa-chalkboard-teacher"></i> CURSOS
                 </a>
             </li>
-            <li><a href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente"> DOCENTES</a></li>
-            <li><a href="http://dutic.unsa.edu.pe/Reportes"> REPORTES</a></li>
+            <li><a href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente">
+                    <i class="fas fa-user-graduate"></i> DOCENTES</a></li>
+            <li><a href="http://dutic.unsa.edu.pe/Reportes">
+                    <i class="fas fa-chart-line"></i> REPORTES</a></li>
 
         </ul>
 

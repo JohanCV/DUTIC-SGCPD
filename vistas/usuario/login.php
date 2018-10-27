@@ -18,7 +18,7 @@
                 <label for="inputPassword"></label>
                 </div>  
                 
-                <button class="btn btn-lg btn-primary " type="submit">Iniciar Sesion</button>
+                <button class="btn btn-lg btn-primary" type="submit">Iniciar Sesion</button>
 </form>
 
 <?php endif; ?>

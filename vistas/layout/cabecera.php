@@ -42,11 +42,7 @@
                 <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/informe">Informe</a> </li>
                 <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/recuperacion">Recuperacion</a> </li>
             <?php endif; ?>
-            <?php if (isset($_SESSION['admin'])) :?>
-                <li class="nav-item active"><a class="nav-link" href="<?=base_url?>usuariocontroller/registro">Agregar</a></li>
-                <li><a class="nav-link" href="<?=base_url?>usuariocontroller/editar">Editar</a></li>
-                <li><a class="nav-link" href="<?=base_url?>usuariocontroller/eliminar">Eliminar</a></li>
-            <?php endif; ?>
+
         </ul>
 
     </nav>

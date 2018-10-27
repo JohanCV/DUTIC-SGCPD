@@ -1,4 +1,24 @@
 <?php if(isset($_SESSION['register']) && $_SESSION['register']=='completo'):?>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">CREACION DE DOCENTES</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <strong>Docente creado correctamente</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="alert alert-success" role="alert">
         <strong>Docente creado correctamente</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -41,6 +61,11 @@
         <input type="text" name="dni" id="inputDNI" class="form-control" placeholder="Ingrese su DNI" required="">
         <label for="inputDNI"></label>
     </div>
+    <div class="form-label-group">
+        <input type="text" name="escuela" id="inputEscuela" class="form-control" placeholder="Ingrese su Escuela" required="">
+        <label for="inputEscuela"></label>
+    </div>
 
-    <button class="btn btn-lg btn-primary " type="submit">Registrar Usuario</button>
+    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal" type="submit">Registrar Usuario</button>
+
 </form>

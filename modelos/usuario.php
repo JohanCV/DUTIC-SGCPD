@@ -6,6 +6,7 @@ class Usuario{
     private $email;
     private $dnipassword;
     private $rol;
+    private $escuela;
     private $db;
 
     public function __construct(){
@@ -31,6 +32,9 @@ class Usuario{
     function getRol(){
         return $this->rol;
     }
+    function getEscuela(){
+        return $this->escuela;
+    }
 
     function setId($id){
         $this->id = $id;
@@ -50,6 +54,9 @@ class Usuario{
     function setRol($rol){
         $this->rol = $rol;
     }
+    function setEscuela($scuela){
+        $this->escuela = $this->db->real_escape_string($scuela);
+    }
 
     public function save(){
       $sql = "INSERT INTO usuarios VALUES (NULL ,
@@ -57,6 +64,7 @@ class Usuario{
               '{$this->getApellido()}',
               '{$this->getEmail()}',
               '{$this->getDnipassword()}',
+              '{$this->getEscuela()}',
               'user')";
       $save = $this->db->query($sql);
 
@@ -93,8 +101,10 @@ class Usuario{
         $docenteslista = $this->db->query("SELECT * FROM usuarios");
         return $docenteslista;
     }
-    public function editar(){
-
+    public function editar($name, $apellido, $email, $dnipass, $escuela, $rol){
+        $this->setNombre('$name');
+        $docentesedicion = $this->db->query("SELECT * FROM usuarios");
+        return $docentesedicion;
     }
     public function eliminar(){
 
