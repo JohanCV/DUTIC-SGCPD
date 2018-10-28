@@ -2,6 +2,42 @@
                 <i class="fas fa-user-plus"></i>
              </a>
 </h3>
+<?php if(isset($_SESSION['register']) && $_SESSION['register']=='completo'):?>
+    <div class="alert alert-success" role="alert">
+        <strong>Docente creado correctamente</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php elseif(isset($_SESSION['register']) && $_SESSION['register']=='fallido'): ?>
+    <div class="alert alert-danger" role="alert">
+        <strong>Docente no creado, Introduzca bien los datos</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
+<?php Utils::deleteSesion('register'); ?>
+
+<?php if(isset($_SESSION['delete']) && $_SESSION['delete']=='completo'):?>
+    <div class="alert alert-success" role="alert">
+        <strong>Docente eliminado correctamente</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php elseif(isset($_SESSION['delete']) && $_SESSION['delete']=='fallido'): ?>
+    <div class="alert alert-danger" role="alert">
+        <strong>Docente no eliminado</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
+<?php Utils::deleteSesion('delete'); ?>
+
 <?php require_once 'vistas/layout/buscar.php'?>
 <table class="table">
     <thead class="thead-light">
@@ -25,9 +61,11 @@
                 <td><?= $docente->apellidos; ?></td>
                 <td><?= $docente->email; ?></td>
                 <td>
-                    <a class="btn btn-xs btn-primary" href="<?=base_url?>usuariocontroller/editar">
+                    <a href="<?=base_url?>usuariocontroller/editar&id=<?= $docente->idusu ?>"
+                       class="btn btn-xs btn-warning">
                         <i class="fas fa-user-edit"></i> Editar</a>
-                    <a class="btn btn-xs btn-danger" href="<?=base_url?>usuariocontroller/eliminar">
+                    <a href="<?=base_url?>usuariocontroller/eliminar&id=<?= $docente->idusu ?>"
+                       class="btn btn-xs btn-danger">
                         <i class="fas fa-user-times"></i> Eliminar</a>
                 </td>
             </tr>

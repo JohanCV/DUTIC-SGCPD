@@ -118,7 +118,7 @@ h1{
     float: right;
     padding-bottom: 10px;
 }
-#buscar .form-inline .form-control {
+#buscar .form-inline {
     width: 400px;
 }
 

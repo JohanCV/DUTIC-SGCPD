@@ -40,10 +40,10 @@ class Usuario{
         $this->id = $id;
     }
     function setNombre($nombre){
-        $this->nombre = $this->db->real_escape_string($nombre);
+        $this->nombre = $this->db->real_escape_string(strtoupper($nombre));
     }
     function setApellidos($apellidos){
-        $this->apellidos = $this->db->real_escape_string($apellidos);
+        $this->apellidos = $this->db->real_escape_string(strtoupper($apellidos));
     }
     function setEmail($email){
         $this->email = $this->db->real_escape_string($email);
@@ -55,10 +55,16 @@ class Usuario{
         $this->rol = $rol;
     }
     function setEscuela($scuela){
-        $this->escuela = $this->db->real_escape_string($scuela);
+        $this->escuela = $this->db->real_escape_string(strtoupper($scuela));
     }
+    function getOne(){
+        $sql = "SELECT * FROM usuarios WHERE idusu = {$this->getId()}";
+        $user = $this->db->query($sql);
 
+        return $user->fetch_object();
+    }
     public function save(){
+      $result = false;
       $sql = "INSERT INTO usuarios VALUES (NULL ,
               '{$this->getNombre()}',
               '{$this->getApellido()}',
@@ -98,16 +104,35 @@ class Usuario{
     }
 
     public function listadocentes(){
-        $docenteslista = $this->db->query("SELECT * FROM usuarios");
+        $docenteslista = $this->db->query("SELECT * FROM usuarios ORDER BY idusu DESC ");
         return $docenteslista;
     }
-    public function editar($name, $apellido, $email, $dnipass, $escuela, $rol){
-        $this->setNombre('$name');
-        $docentesedicion = $this->db->query("SELECT * FROM usuarios");
-        return $docentesedicion;
+    public function editar(){
+        $sql = "UPDATE usuarios SET 
+              nombre='{$this->getNombre()}',
+              apellidos='{$this->getApellido()}',
+              email='{$this->getEmail()}',
+              dnipassword='{$this->getDnipassword()}',
+              escuela='{$this->getEscuela()}'
+              WHERE idusu={$this->id}";
+        $edit = $this->db->query($sql);
+
+        $result=false;
+        if ($edit){
+            $result = true;
+        }
+
+        return $result;
     }
     public function eliminar(){
+        $sql = "DELETE FROM usuarios WHERE idusu = {$this->id} ";
+        $delete = $this->db->query($sql);
+        $result = false;
 
+        if ($delete){
+            $result = true;
+        }
+        return $result;
     }
 
 }

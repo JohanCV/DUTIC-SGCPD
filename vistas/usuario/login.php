@@ -1,5 +1,15 @@
-<?php if (!isset($_SESSION['identity'])):?>
+<?php if(isset($_SESSION['error_login']) && $_SESSION['error_login']=='fallido'): ?>
+    <div class="alert alert-danger" role="alert">
+        <strong>Datos Incorrectos</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
 
+
+<?php if (!isset($_SESSION['identity'])):?>
+    <?php Utils::deleteSesion('error_login'); ?>
 <form action="<?=base_url?>usuariocontroller/login" method="POST" class="form-signin">
                 <div class="text-center mb-4">
                 <img class="mb-4" src="<?=base_url?>assets/img/logodutic.png" alt="logoDutic" width="100" height="100">

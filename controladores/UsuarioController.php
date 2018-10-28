@@ -29,8 +29,17 @@ class UsuarioController{
                 $usuario->setEmail($email);
                 $usuario->setDnipassword($dni);
                 $usuario->setEscuela($escuela);
-                $save = $usuario->save();
-               // var_dump($usuario);
+
+                //Editar usuario
+                if (isset($_GET['id'])){
+                    $id = $_GET['id'];
+                    $usuario->setId($id);
+                    $save = $usuario->editar();
+
+                }else{
+                    $save = $usuario->save();
+                }
+
                 if($save){
                     $_SESSION['register'] = "completo"; 
                 }else{
@@ -57,13 +66,13 @@ class UsuarioController{
             //identificar al usuario
             if($identity && is_object($identity)){
                 $_SESSION['identity'] = $identity;
-
+                var_dump($identity);
                 if ($identity->rol == 'admin'){
                     $_SESSION['admin'] = true;
                     header("Location:".base_url.'cursocontroller/index');
                 }
             }else{
-                $_SESSION['error_login']='Identificacion fallida!!';
+                $_SESSION['error_login']='fallido';
             }
         }
        header("Location:".base_url.'cursocontroller/index');
@@ -82,21 +91,49 @@ class UsuarioController{
     }
 
     public function  buscar(){
-
+        Utils::isAdmin();
     }
 
     public function listadocentes(){
+        Utils::isAdmin();
         $docente = new Usuario();
         $docentes = $docente->listadocentes();
-
 
         require_once 'vistas/usuario/listadocentes.php';
     }
     public function editar(){
+        Utils::isAdmin();
+
+        if (isset($_GET['id'])){
+            $edit = true;
+            $id = $_GET['id'];
+            $user = new Usuario();
+            $user->setId($id);
+            $usuario = $user->getOne();
+            require_once 'vistas/usuario/registro.php';
+        }else{
+            header("Location:".base_url.'usuariocontroller/listadocentes');
+        }
 
     }
     public function eliminar(){
+        Utils::isAdmin();
 
+        if (isset($_GET['id'])){
+            $user = new Usuario();
+            $user->setId($_GET['id']);
+            $delete = $user->eliminar();
+
+            if ($delete){
+                $_SESSION['delete']= 'completo';
+            }else{
+                $_SESSION['delete']= 'fallido';
+            }
+        }else{
+            $_SESSION['delete']= 'fallido';
+        }
+
+        header("Location:".base_url.'usuariocontroller/listadocentes');
     }
 
 }//fin class
