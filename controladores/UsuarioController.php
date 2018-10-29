@@ -89,17 +89,34 @@ class UsuarioController{
         //session_destroy();
         header("Location:".base_url);
     }
-
-    public function  buscar(){
-        Utils::isAdmin();
-    }
-
     public function listadocentes(){
         Utils::isAdmin();
         $docente = new Usuario();
-        $docentes = $docente->listadocentes();
+        $docentes = $docente->getAll();
 
-        require_once 'vistas/usuario/listadocentes.php';
+        $numero_elementos =$docentes->num_rows;
+        $numero_elementos_pagina = 50;
+           var_dump($numero_elementos);
+        //numero total de elmentos a paginar
+        $pagination = new Zebra_Pagination();
+        $pagination->navigation_position(isset($_GET['navigation_position'])
+                            && in_array($_GET['navigation_position'],
+                            array('left', 'right')) ?
+                            $_GET['navigation_position'] : 'outside');
+
+
+        $pagination->records($numero_elementos);
+        //numero de elementos por pagina
+        $pagination->records_per_page($numero_elementos_pagina);
+
+        $page = $pagination->get_page();
+        var_dump($page);
+        $empieza_aqui = (($page-1))*$numero_elementos_pagina;
+        $PRO = $docente->listadocentes($empieza_aqui,$numero_elementos_pagina);
+
+        include 'vistas/usuario/listadocentes.php';
+        $pagination->labels('Atras', 'Siguiente');
+        $pagination->render();
     }
     public function editar(){
         Utils::isAdmin();
@@ -135,6 +152,33 @@ class UsuarioController{
 
         header("Location:".base_url.'usuariocontroller/listadocentes');
     }
+    public function  buscar(){
+        Utils::isAdmin();
+        $this->listadocentes();
+
+        if (isset($_POST['busqueda'])){
+            $buscarentradas = $_POST['busqueda'];
+            $docentes = new Usuario();
+            //require_once 'vistas/usuario/listadocentes.php';
+
+            if (is_numeric($buscarentradas)){
+                $docentes->setDnipassword($buscarentradas);
+                $docentes->buscar();
+                var_dump($docentes);
+            }else{
+                $docentes->setApellidos($buscarentradas);
+                $docentes->buscar();
+            }
+        }else{
+            header("Location:".base_url.'usuariocontroller/listadocentes');
+        }
+    }
+
+    public function report(){
+        Utils::isAdmin();
+        require_once 'vistas/reportes/reportes.php';
+    }
+
 
 }//fin class
 

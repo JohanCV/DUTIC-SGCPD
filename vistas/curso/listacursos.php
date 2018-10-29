@@ -9,56 +9,16 @@
 
 
 <!--cursos disponibles -->
-<div id="central">
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Basico</h2>
-        <p>Hora: 9:00 - 11:00</p>
-        <p>Dia: Lunes, Jueves</p>
-        <p>Profesor: Miss Vidal</p>
-        <a href="" class="btn btn-dark">Ver</a>
+<?php while ($curso = $CURSO->fetch_object()): ?>
+    <div id="central">
+        <div class="curso">
+            <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
+            <h2><?= $curso->nombre; ?></h2>
+            <p>Hora: <?= $curso->hora; ?></p>
+            <p>Dia: <?= $curso->dia; ?> </p>
+            <p>Profesor: <?= $curso->profesor; ?></p>
+            <a href="" class="btn btn-dark">Ver</a>
+        </div>
     </div>
 
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Intermedio</h2>
-        <p>Hora: 12:00 - 1:00</p>
-        <p>Dia: Martes, Miercoles, Jueves</p>
-        <p>Profesor: Miss Vidal</p>
-        <a href="" class="btn btn-dark">Ver</a>
-    </div>
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Avanzado</h2>
-        <p>Hora: 12:00 - 1:00</p>
-        <p>Dia:  Miercoles</p>
-        <p>Profesor: Jorge Vizcarra</p>
-        <a href="" class="btn btn-dark">Ver</a>
-    </div>
-
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Basico</h2>
-        <p>Hora: 9:00 - 11:00</p>
-        <p>Dia: Lunes, Jueves</p>
-        <p>Profesor: Miss Vidal</p>
-        <a href="" class="btn btn-dark">Ver</a>
-    </div>
-
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Intermedio</h2>
-        <p>Hora: 12:00 - 1:00</p>
-        <p>Dia: Martes, Miercoles, Jueves</p>
-        <p>Profesor: Miss Vidal</p>
-        <a href="" class="btn btn-dark">Ver</a>
-    </div>
-    <div class="curso">
-        <img src="<?=base_url?>assets/img/moodle.png" alt="moodle">
-        <h2>Moodle Avanzado</h2>
-        <p>Hora: 12:00 - 1:00</p>
-        <p>Dia:  Miercoles</p>
-        <p>Profesor: Jorge Vizcarra</p>
-        <a href="" class="btn btn-dark">Ver</a>
-    </div>
-</div>
+<?php endwhile; ?>

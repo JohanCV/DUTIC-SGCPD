@@ -53,10 +53,10 @@
 
     <tbody>
     <?php $contador = 1; ?>
-        <?php while ($docente = $docentes->fetch_object() ): ?>
+        <?php while ($docente = $PRO->fetch_object() ): ?>
             <tr>
                 <th scope="row"><?php echo $contador ?></th>
-                <td><?= $docente->escuela; ?></td>
+                <td><?= $docente->ides; ?></td>
                 <td><?= $docente->nombre; ?></td>
                 <td><?= $docente->apellidos; ?></td>
                 <td><?= $docente->email; ?></td>
@@ -69,7 +69,8 @@
                         <i class="fas fa-user-times"></i> Eliminar</a>
                 </td>
             </tr>
-            <?php $contador++; ?>
+            <?php $contador++; //var_dump($docente);?>
         <?php endwhile; ?>
+
     </tbody>
 </table>

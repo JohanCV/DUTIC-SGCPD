@@ -83,14 +83,20 @@
     <div class="form-label-group">
         <input type="text" name="escuela" id="inputEscuela"
                class="form-control" placeholder="Ingrese su Escuela" required=""
-               value="<?= isset($usuario) && is_object($usuario)?$usuario->escuela : ''; ?>">
+               value="<?= isset($usuario) && is_object($usuario)?$usuario->ides : ''; ?>">
         <label for="inputEscuela"></label>
     </div>
-    <!--div class="form-label-group">
+
+    <?php $school = Utils::showEscuelas();?>
+    <div class="form-label-group">
         <select class="form-control" name="escuelas" id="" >
-            <option value=""></option>
+            <?php while ($esc = $school->fetch_object() ): ?>
+                <option value="<?=isset($usuario) && is_object($usuario)?$usuario->ides: ''; ?>">
+                    <?=$esc->nombre?>
+                </option>
+            <?php endwhile; ?>
         </select>
-    </div-->
+    </div>
 
     <?php if (isset($edit) && $edit == true): ?>
         <button class="btn btn-lg btn-warning"

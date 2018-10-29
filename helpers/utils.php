@@ -22,6 +22,13 @@ class Utils{
             return true;
         }
     }
+
+    public static function showEscuelas(){
+        require_once 'modelos/escuela.php';
+        $escuelas = new Escuela();
+        $escuelas->getAll();
+
+        return $escuelas;
+    }
 }
 
-?>

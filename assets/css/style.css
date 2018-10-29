@@ -80,6 +80,10 @@ h1{
     background: #660e24;
 }
 
+#menulateral a #user{
+    border-bottom: 1px solid #c2c2c2;
+}
+
 #menu{
     margin: 0px auto;
     padding: 0px;
@@ -162,8 +166,11 @@ h1{
     margin-top: 10px;
 }
 /*Pagina de Inicio de sesion*/
+#menulateral .form-signin img #imglogo{
+    margin-top: 8px;
+}
 #menulateral .form-signin .mb-4{
-    margin-top: 0px;
+    margin-top: 8px;
 }
 #menulateral .form-signin .form-label-group {
     padding-left: 0%;
@@ -196,6 +203,7 @@ h1{
 
 .curso img{
     width: 75%;
+    margin-top: 5%;
     margin-bottom: 5%;
 }
 
