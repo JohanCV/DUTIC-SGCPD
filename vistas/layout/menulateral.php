@@ -1,12 +1,16 @@
 <?php if (isset($_SESSION['identity'])):?>
     <!--menu lateral -->
     <aside id="menulateral">
-        <ul>
-            <li><a id="user" href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente">
-                    <strong>Bienvenido <?= $_SESSION['identity']->nombre ?>
-                        <?= $_SESSION['identity']->apellidos ?>
-                    </strong></a></li>
+        <div class="sidebar-header">
+            <strong>Bienvenid@ </strong>
+            <br>
+            <strong>
+                <?= $_SESSION['identity']->nombre ?>
+                <?= $_SESSION['identity']->apellidos ?>
+            </strong>
+        </div>
 
+        <ul>
             <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
                     <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
             <li><a href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente">

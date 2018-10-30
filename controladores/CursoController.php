@@ -6,9 +6,10 @@ class CursoController{
         Utils::isAdmin();
        // Utils::isUser();
         //require_once 'vistas/curso/listacursos.php';
+        $this->listacursos();
     }
 
-    public function listadocursos(){
+    public function listacursos(){
         //Utils::isAdmin();
         $curso = new Curso();
         $cursos = $curso->getAll();
@@ -23,18 +24,19 @@ class CursoController{
             array('left', 'right')) ?
             $_GET['navigation_position'] : 'outside');
 
-
         $pagination->records($numero_elementos);
         //numero de elementos por pagina
         $pagination->records_per_page($numero_elementos_pagina);
 
         $page = $pagination->get_page();
-        var_dump($page);
         $empieza_aqui = (($page-1))*$numero_elementos_pagina;
         $CURSO = $curso->listaCursos($empieza_aqui,$numero_elementos_pagina);
 
         require_once 'vistas/curso/listacursos.php';
         $pagination->labels('Atras', 'Siguiente');
         $pagination->render();
+
+        //uso del return para poder mostrar los cursos antes de iniciar sesion
+        return $CURSO;
     }
 }

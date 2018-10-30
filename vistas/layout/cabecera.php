@@ -33,7 +33,7 @@
             </div>
         <?php endif; ?>
     </header>
-    <nav id="menu" class="navbar sticky-top navbar-dark bg-dark">
+    <nav id="menu" class="navbar sticky-top navbar-dark ">
         <ul class="navbar-nav">
             <?php if (isset($_SESSION['admin'])):?>
                 <li class="nav-item active"><a class="nav-link" href="<?=base_url?>cursocontroller/inscripcion">Inscripcion</a></li>

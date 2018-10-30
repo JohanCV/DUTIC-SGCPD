@@ -95,7 +95,7 @@ class UsuarioController{
         $docentes = $docente->getAll();
 
         $numero_elementos =$docentes->num_rows;
-        $numero_elementos_pagina = 50;
+        $numero_elementos_pagina = 10;
            var_dump($numero_elementos);
         //numero total de elmentos a paginar
         $pagination = new Zebra_Pagination();

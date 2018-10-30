@@ -1,3 +1,5 @@
+<h3>REPORTES DE USO DEL AULA VIRTUAL</h3>
+
 <div class="container">
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="http://dutic.unsa.edu.pe/Reportes/Reporte1.php"

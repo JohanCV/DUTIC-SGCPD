@@ -1,4 +1,4 @@
-<h3>DOCENTES <a href="<?=base_url?>usuariocontroller/registro">
+<h3>DOCENTES AGUSTINOS<a href="<?=base_url?>usuariocontroller/registro">
                 <i class="fas fa-user-plus"></i>
              </a>
 </h3>
