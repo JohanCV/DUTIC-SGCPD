@@ -1,4 +1,4 @@
-<h3>CURSOS DE CAPACITACION</h3>
+<h3> CURSOS DE CAPACITACION</h3>
 <?php if(isset($_SESSION['edicion']) && $_SESSION['edicion']=='completo'):?>
     <div class="alert alert-success" role="alert">
         <strong>Curso editado correctamente</strong>

@@ -9,6 +9,15 @@ class Database{
 
         return $database;
     }
+    public static function connectmoodle(){
+        $database = new mysqli('localhost'
+                              ,'root'
+                              ,''
+                              ,'moodle');
+        $database->query("SET NAMES 'utf8'");
+
+        return $database;
+    }
 }
 
 ?>

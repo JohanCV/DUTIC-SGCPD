@@ -1,4 +1,4 @@
-<h3>MATRICULADOS: </h3>
+<h3>MATRICULADOS</h3>
 
 <?php require_once 'vistas/layout/buscar.php'?>
 

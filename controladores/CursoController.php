@@ -64,6 +64,7 @@ class CursoController{
 
     public function listacursos(){
         Utils::isAdmin();
+        Utils::isUser();
         $dentrocurso = true;
         $curso = new Curso();
         $CURSO = $curso->getAll();
@@ -233,6 +234,7 @@ class CursoController{
     public function seguimiento(){
       Utils::isAdmin();
       if (isset($_GET['id'])) {
+          var_dump($_GET['id']);
           $buscarusuariocurso = true;
           $cursomatricula = new Usuariocurso();
           $cursomatri = $cursomatricula->getOne($_GET['id']);
@@ -250,6 +252,20 @@ class CursoController{
 
       return $cursomatri;
     }
+
+    public function seguimietnopersonal(){
+      Utils::isAdmin();
+      if (isset($_GET['idcp'])) {
+        $cursoprueba = $_GET['idcp'];
+        echo "$cursoprueba";
+        $seguir = new Seguimiento();
+        $seguimiento = $seguir->seguimiento($_GET['idcp']);
+      }
+
+      require_once 'vistas/curso/seguimientopersonal.php';
+      return $seguimiento;
+    }
+
     public function informe(){
       Utils::isAdmin();
       require_once 'vistas/curso/informe.php';

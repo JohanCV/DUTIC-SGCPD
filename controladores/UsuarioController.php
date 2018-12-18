@@ -70,6 +70,11 @@ class UsuarioController{
                 if ($identity->rol == 'admin'){
                     $_SESSION['admin'] = true;
                     header("Location:".base_url.'cursocontroller/index');
+                }else {
+                  if ($identity->rol == 'user') {
+                    $_SESSION['user'] = true;
+                    header("Location:".base_url.'cursocontroller/listacursos');
+                  }
                 }
             }else{
                 $_SESSION['error_login']='fallido';
@@ -87,7 +92,7 @@ class UsuarioController{
             unset($_SESSION['admin']);
         }
         //session_destroy();
-        header("Location:".base_url);
+        header("Location:".base_url.'index');
     }
     public function listadocentes(){
         Utils::isAdmin();

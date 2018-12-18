@@ -9,6 +9,13 @@
                 <?= $_SESSION['identity']->apellidos ?>
             </strong>
         </div>
+        <?php if (isset($_SESSION['identity']->rol) && $_SESSION['identity']->rol == 'user'):?>
+          <ul>
+              <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
+                      <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
+
+          </ul>
+        <?php else:?>
           <ul>
               <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
                       <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
@@ -18,10 +25,8 @@
                       <i class="fas fa-chart-line"></i> REPORTES</a></li>
 
           </ul>
-        <ul>
-            <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
-                    <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
-        </ul>        
+
+        <?php endif; ?>
     </aside>
 
 <?php  ?>
