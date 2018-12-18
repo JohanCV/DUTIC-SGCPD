@@ -3,143 +3,126 @@ class Curso{
     private $id;
     private $nombre;
     private $nombrecorto;
-    private $hora;
-    private $dia;
-    private $profesor;
+    private $horainicio;
+    private $horafinal;
     private $contenido;
+    private $idprofesor;
 
     private $db;
 
-    /**
-     * Curso constructor.
-     */
     public function __construct(){
         $this->db = Database::connect();
     }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
+    public function getId(){
         return $this->id;
     }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
+    public function setId($id){
         $this->id = $id;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getNombre()
-    {
+    public function getNombre(){
         return $this->nombre;
     }
-
-    /**
-     * @param mixed $nombre
-     */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre){
         $this->nombre = $nombre;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getNombrecorto()
-    {
+    public function getNombrecorto(){
         return $this->nombrecorto;
     }
-
-    /**
-     * @param mixed $nombrecorto
-     */
-    public function setNombrecorto($nombrecorto)
-    {
+    public function setNombrecorto($nombrecorto){
         $this->nombrecorto = $nombrecorto;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getHora()
-    {
-        return $this->hora;
+    public function getHorainicio(){
+        return $this->horainicio;
     }
-
-    /**
-     * @param mixed $hora
-     */
-    public function setHora($hora)
-    {
-        $this->hora = $hora;
+    public function setHorainicio($hora){
+        $this->horainicio = $hora;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getDia()
-    {
-        return $this->dia;
+    public function getHorafinal(){
+        return $this->horafinal;
     }
-
-    /**
-     * @param mixed $dia
-     */
-    public function setDia($dia)
-    {
-        $this->dia = $dia;
+    public function setHorafinal($hf){
+        $this->horafinal = $hf;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getProfesor()
-    {
-        return $this->profesor;
-    }
-
-    /**
-     * @param mixed $profesor
-     */
-    public function setProfesor($profe)
-    {
-        $this->dia = $profe;
-    }
-    /**
-     * @return mixed
-     */
-    public function getContenido()
-    {
+    public function getContenido(){
         return $this->contenido;
     }
-
-    /**
-     * @param mixed $contenido
-     */
-    public function setContenido($contenido)
-    {
+    public function setContenido($contenido){
         $this->contenido = $contenido;
+    }
+    public function getIdprofesor(){
+        return $this->idprofesor;
+    }
+    public function setIdprofesor($profe){
+        $this->idprofesor = $profe;
+    }
+
+    function getOne(){
+        $sql = "SELECT * FROM curso WHERE idcurso = {$this->getId()}";
+        $course = $this->db->query($sql);
+
+        return $course->fetch_object();
     }
 
     public function getAll(){
-        $sql = "SELECT * FROM curso ORDER BY idcurso DESC ";
+        $sql = "SELECT * FROM curso";
         $cursos = $this->db->query($sql);
 
         return $cursos;
     }
 
     public function listaCursos($n_element, $n_elemet_page){
-        $sql ="SELECT * FROM curso ORDER BY idcurso DESC 
+        $sql ="SELECT * FROM curso ORDER BY idcurso DESC
                 LIMIT $n_element, $n_elemet_page";
         $cursolista = $this->db->query($sql);
         return $cursolista;
+    }
+
+    public function save(){
+      $result = false;
+      $sql = "INSERT INTO curso VALUES (NULL ,
+              '{$this->getNombre()}',
+              '{$this->getNombrecorto()}',
+              '{$this->getHorainicio()}',
+              '{$this->getHorafinal()}',
+              '{$this->getContenido()}',
+              '{$this->getIdprofesor()}')";
+      $save = $this->db->query($sql);
+      echo $this->db->error;
+      die();
+      if ($save) {
+          $result= true;
+      }
+
+      return $result;
+    }
+
+    public function editar(){
+        $sql = "UPDATE curso SET
+              nombre='{$this->getNombre()}',
+              nombrecorto='{$this->getNombrecorto()}',
+              horainicio='{$this->getHorainicio()}',
+              horafinal='{$this->getHorafinal()}',
+              contenido='{$this->getContenido()}',
+              idprofesor='{$this->getIdprofesor()}'
+              WHERE idcurso={$this->id}";
+        $edit = $this->db->query($sql);
+
+        $result=false;
+        if ($edit){
+            $result = true;
+        }
+
+        return $result;
+    }
+    public function eliminar(){
+        $sql = "DELETE FROM curso WHERE idcurso = {$this->id} ";
+        $delete = $this->db->query($sql);
+        $result = false;
+
+        if ($delete){
+            $result = true;
+        }
+        return $result;
     }
 
 }//fin de clase

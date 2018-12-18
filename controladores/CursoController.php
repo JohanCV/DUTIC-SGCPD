@@ -1,5 +1,8 @@
 <?php
 require_once 'modelos/curso.php';
+require_once 'modelos/usuario.php';
+require_once 'modelos/usuariocurso.php';
+require_once 'modelos/asistencia.php';
 
 class CursoController{
     public function index(){
@@ -9,34 +12,250 @@ class CursoController{
         $this->listacursos();
     }
 
+    public function crear(){
+      Utils::isAdmin();
+
+      require_once 'vistas/curso/crear.php';
+    }
+
+    public function save(){
+      Utils::isAdmin();
+        if (isset($_POST)) {
+            $nombre = isset($_POST['nombre'])?$_POST['nombre'] : false;
+            $nombrecorto = isset($_POST['nombrecorto'])?$_POST['nombrecorto'] : false;
+            $horainicio = isset($_POST['horainicio'])?$_POST['horainicio'] : false;
+            $horafinal= isset($_POST['horafin'])?$_POST['horafin'] : false;
+            $contenido = isset($_POST['contenido'])?$_POST['contenido'] : false;
+            $rofesor = isset($_POST['profesor'])?$_POST['profesor'] : false;
+
+            if ($nombre &&  $nombrecorto && $horainicio
+                && $horafinal && $contenido && $rofesor) {
+
+                  $curso =  new Curso();
+                  $curso->setNombre($nombre);
+                  $curso->setNombrecorto($nombrecorto);
+                  $curso->setHorainicio($horainicio);
+                  $curso->setHorafinal($horafinal);
+                  $curso->setContenido($contenido);
+                  $curso->setIdprofesor($rofesor);
+
+                  if (isset($_GET['id'])) {
+                      $id = $_GET['id'];
+                      $curso->setId($id);
+                      $save = $curso->editar();
+                  }else {
+                      $save = $curso->save();
+                  }
+
+                  if ($save) {
+                    $_SESSION['curso'] = "completo";
+                  }else {
+                    $_SESSION['curso'] = "fallido";
+                  }
+            }else {
+              $_SESSION['curso'] = "fallido";
+            }
+
+        }else {
+          $_SESSION['curso'] = "fallido";
+        }
+        header('Location:'.base_url.'cursocontroller/listacursos');
+    }
+
     public function listacursos(){
-        //Utils::isAdmin();
+        Utils::isAdmin();
+        $dentrocurso = true;
         $curso = new Curso();
-        $cursos = $curso->getAll();
+        $CURSO = $curso->getAll();
 
-        $numero_elementos =$cursos->num_rows;
-        $numero_elementos_pagina = 2;
-        var_dump($numero_elementos);
-        //numero total de elmentos a paginar
-        $pagination = new Zebra_Pagination();
-        $pagination->navigation_position(isset($_GET['navigation_position'])
-        && in_array($_GET['navigation_position'],
-            array('left', 'right')) ?
-            $_GET['navigation_position'] : 'outside');
-
-        $pagination->records($numero_elementos);
-        //numero de elementos por pagina
-        $pagination->records_per_page($numero_elementos_pagina);
-
-        $page = $pagination->get_page();
-        $empieza_aqui = (($page-1))*$numero_elementos_pagina;
-        $CURSO = $curso->listaCursos($empieza_aqui,$numero_elementos_pagina);
-
+        if ($dentrocurso) {
+            $_SESSION['dentro'] = 'dentrocurso';
+        }else {
+            $_SESSION['dentro'] = 'noentrocurso';
+        }
         require_once 'vistas/curso/listacursos.php';
-        $pagination->labels('Atras', 'Siguiente');
-        $pagination->render();
 
         //uso del return para poder mostrar los cursos antes de iniciar sesion
         return $CURSO;
+    }
+
+    public function editar(){
+        Utils::isAdmin();
+
+        if (isset($_GET['id'])){
+            $edit = true;
+            $id = $_GET['id'];
+            $curso = new Curso();
+            $curso->setId($id);
+            $edicion = $curso->getOne();
+            require_once 'vistas/curso/crear.php';
+
+            if ($edicion){
+                $_SESSION['edicion']= 'completo';
+            }else{
+                $_SESSION['edicion']= 'fallido';
+            }
+        }else{
+            $_SESSION['edicion']= 'fallido';
+            header("Location:".base_url.'cursocontroller/listacursos');
+        }
+
+    }
+    public function eliminar(){
+        Utils::isAdmin();
+
+        if (isset($_GET['id'])){
+            $curso = new Curso();
+            $curso->setId($_GET['id']);
+            $delete = $curso->eliminar();
+
+            if ($delete){
+                $_SESSION['delete']= 'completo';
+            }else{
+                $_SESSION['delete']= 'fallido';
+            }
+        }else{
+            $_SESSION['delete']= 'fallido';
+        }
+
+        header("Location:".base_url.'cursocontroller/listacursos');
+    }
+
+    public function savematricula(){
+
+      if (isset($_POST)) {
+          //var_dump($_GET['idoc']);
+          $idusu = isset($_POST['usuario'])?$_POST['usuario'] : false;
+          $idcurso = isset($_POST['curso'])?$_POST['curso'] : false;
+          $estado = isset($_POST['estado'])?$_POST['estado'] : false;
+          $idcp= isset($_POST['cursoprueba'])?$_POST['cursoprueba'] : false;
+          var_dump($idusu);
+          var_dump($idcurso);
+          var_dump($estado);
+          var_dump($idcp);
+          echo "entro post";
+          if ($idusu &&  $idcurso && $estado
+              && $idcp) {
+                echo "entro if";
+                var_dump($idusu);
+                var_dump($idcurso);
+                var_dump($idcp);
+                $curso =  new Usuariocurso();
+                $curso->setIdusu($idusu);
+                $curso->setIdcurso($idcurso);
+                $curso->setEstadoasistencia($estado);
+                $curso->setIdcursoprueba($idcp);
+
+                /*if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $curso->setId($id);
+                    $save = $curso->editar();
+                }else {*/
+                    $save = $curso->save();
+                //}
+                var_dump($save);
+                if ($save) {
+                  $_SESSION['matricula'] = "completo";
+                }else {
+                  $_SESSION['matricula'] = "fallido";
+                }
+          }else {
+            $_SESSION['matricula'] = "fallido";
+          }
+
+      }else {
+        $_SESSION['matricula'] = "fallido";
+      }
+      header("Location:".base_url.'cursocontroller/inscripcion&id='.$idcurso);
+    }
+
+    public function inscripcion(){
+      Utils::isAdmin();
+
+      if (isset($_GET['id'])) {
+          $buscarusuariocurso = true;
+          $cursomatricula = new Usuariocurso();
+          $cursomatri = $cursomatricula->getOne($_GET['id']);
+
+          if ($buscarusuariocurso) {
+              $_SESSION['buscarusercourse'] = 'encontrado';
+          }else {
+              $_SESSION['buscarusercourse'] = 'noencontrado';
+          }
+      }else {
+
+          if (isset($_GET['idusu'])) {
+            $usuario = new Usuariocurso();
+            $usuario->setIduc($_GET['idusu']);
+            $cursomatri = $usuario->eliminar();
+            header("Location:".base_url.'cursocontroller/listacursos');
+          }
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+      }
+      require_once 'vistas/curso/inscripcion.php';
+
+      return $cursomatri;
+    }
+
+
+    public function matricular(){
+      Utils::isAdmin();
+
+
+      require_once 'vistas/curso/matricula.php';
+    }
+
+
+
+    public function asistencia(){
+      Utils::isAdmin();
+
+      if (isset($_GET['id'])) {
+
+          $buscarusuariocurso = true;
+          $asistencia = new Asistencia();
+          $cursoasistencia = $asistencia->getOne($_GET['id']);
+
+          if ($buscarusuariocurso) {
+              $_SESSION['buscarusercourse'] = 'encontrado';
+          }else {
+              $_SESSION['buscarusercourse'] = 'noencontrado';
+          }
+      }else {
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+      }
+
+      require_once 'vistas/curso/asistencia.php';
+
+      return $cursoasistencia;
+
+    }
+    public function seguimiento(){
+      Utils::isAdmin();
+      if (isset($_GET['id'])) {
+          $buscarusuariocurso = true;
+          $cursomatricula = new Usuariocurso();
+          $cursomatri = $cursomatricula->getOne($_GET['id']);
+
+          if ($buscarusuariocurso) {
+              $_SESSION['buscarusercourse'] = 'encontrado';
+          }else {
+              $_SESSION['buscarusercourse'] = 'noencontrado';
+          }
+      }else {
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+      }
+
+      require_once 'vistas/curso/seguimiento.php';
+
+      return $cursomatri;
+    }
+    public function informe(){
+      Utils::isAdmin();
+      require_once 'vistas/curso/informe.php';
+    }
+    public function recuperacion(){
+      Utils::isAdmin();
+      require_once 'vistas/curso/recuperacion.php';
     }
 }

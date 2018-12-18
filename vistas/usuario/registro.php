@@ -1,41 +1,3 @@
-<?php if(isset($_SESSION['register']) && $_SESSION['register']=='completo'):?>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">CREACION DE DOCENTES</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <strong>Docente creado correctamente</strong>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="alert alert-success" role="alert">
-        <strong>Docente creado correctamente</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-<?php elseif(isset($_SESSION['register']) && $_SESSION['register']=='fallido'): ?>
-    <div class="alert alert-danger" role="alert">
-        <strong>Docente no creado, Introduzca bien los datos</strong> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-<?php endif; ?>
-
-<?php Utils::deleteSesion('register'); ?>
-
 <?php if (isset($edit) && $edit == true && isset($usuario) && is_object($usuario)): ?>
     <div class="text-center mb-4">
         <img class="mb-4" src="<?=base_url?>assets/img/logodutic.png" alt="logoDutic" width="100" height="100">
@@ -80,22 +42,17 @@
         <label for="inputDNI"></label>
     </div>
 
-    <div class="form-label-group">
-        <input type="text" name="escuela" id="inputEscuela"
-               class="form-control" placeholder="Ingrese su Escuela" required=""
-               value="<?= isset($usuario) && is_object($usuario)?$usuario->ides : ''; ?>">
-        <label for="inputEscuela"></label>
-    </div>
-
     <?php $school = Utils::showEscuelas();?>
     <div class="form-label-group">
         <select class="form-control" name="escuelas" id="" >
             <?php while ($esc = $school->fetch_object() ): ?>
-                <option value="<?=isset($usuario) && is_object($usuario)?$usuario->ides: ''; ?>">
+                <option value="<?=isset($usuario) && is_object($usuario)?$usuario->ides: ''; ?>"
+                  <?= isset($usuario) && is_object($usuario) && $esc->ides == $usuario->ides ? 'selected' : ''; ?>>
                     <?=$esc->nombre?>
                 </option>
             <?php endwhile; ?>
         </select>
+        <label for="inputEscuela"></label>
     </div>
 
     <?php if (isset($edit) && $edit == true): ?>

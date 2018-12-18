@@ -9,16 +9,19 @@
                 <?= $_SESSION['identity']->apellidos ?>
             </strong>
         </div>
+          <ul>
+              <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
+                      <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
+              <li><a href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente">
+                      <i class="fas fa-user-graduate"></i> DOCENTES</a></li>
+              <li><a href="<?=base_url?>usuariocontroller/report">
+                      <i class="fas fa-chart-line"></i> REPORTES</a></li>
 
+          </ul>
         <ul>
             <li><a href="<?=base_url?>cursocontroller/index" name="clickcursos">
                     <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>
-            <li><a href="<?=base_url?>usuariocontroller/listadocentes" name="clickdocente">
-                    <i class="fas fa-user-graduate"></i> DOCENTES</a></li>
-            <li><a href="<?=base_url?>usuariocontroller/report">
-                    <i class="fas fa-chart-line"></i> REPORTES</a></li>
-
-        </ul>
+        </ul>        
     </aside>
 
 <?php  ?>
@@ -31,8 +34,3 @@
     </aside>
 
 <?php endif; ?>
-
-
-
-            
-

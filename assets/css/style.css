@@ -43,7 +43,7 @@ h1{
 #logout{
     float: right;
     width: 4%;
-    margin-right: 4%;   
+    margin-right: 4%;
 }
 #texto, #logout{
     display: inline-block;
@@ -76,7 +76,7 @@ h1{
 }
 #menulateral ul{
     list-style: none;
-    text-decoration: none;    
+    text-decoration: none;
     margin: 0px auto;
     font-size: 105%;
     font-weight: bold;
@@ -109,22 +109,21 @@ h1{
     margin: 0px auto;
     padding: 0px;
     margin-top: 0px;
-    background: rgba(0,0,0,0.9);position: sticky;
+    background: rgba(0,0,0,0.1);position: sticky;
 }
 #menu ul{
     list-style: none;
     text-decoration: none;
     margin: 0px auto;
     font-size: 105%;
-    font-weight: bold;
     display: block;
 }
 #menu ul li{
-    line-height: 3rem;
+    line-height: 2rem;
     border-right: 1px solid #f0f0f0;
     display: inline-block;
     letter-spacing: 1px;
-    padding-right: 10px;
+    padding-right: 5px;
 
 }
 
@@ -181,10 +180,10 @@ h1{
 #footer{
     width: 98%;
     background: white;
-    min-height: 2em;    
+    min-height: 2em;
     margin: 0px auto;
     box-shadow: 10px 0px 0px gray;
-    
+
 }
 #footer p{
     font-size: 120%;
@@ -210,7 +209,7 @@ h1{
     margin-bottom: 0px;
 }
 /*Especifico*/
-.agregar{    
+.agregar{
     float: right;
 }
 #central{

@@ -118,13 +118,13 @@ class Usuario{
     }
 
     public function listadocentes($n_element, $n_elemet_page){
-        $sql ="SELECT * FROM usuarios ORDER BY idusu DESC 
+        $sql ="SELECT * FROM usuarios ORDER BY idusu DESC
                 LIMIT $n_element, $n_elemet_page";
         $docenteslista = $this->db->query($sql);
         return $docenteslista;
     }
     public function editar(){
-        $sql = "UPDATE usuarios SET 
+        $sql = "UPDATE usuarios SET
               nombre='{$this->getNombre()}',
               apellidos='{$this->getApellido()}',
               email='{$this->getEmail()}',
@@ -150,19 +150,16 @@ class Usuario{
         }
         return $result;
     }
-    public function buscar(){
-        $sql ="SELECT * FROM usuarios WHERE
-               dnipassword  LIKE {$this->dnipassword}";
-        $search = $this->db->query($sql);
+    public function search($busqueda){
+        if (!empty($busqueda)) {
+          $dni = $this->getDnipassword();
+          $sql ="SELECT * FROM usuarios WHERE dnipassword  LIKE '%$dni%' || apellidos LIKE '%$busqueda%' || email LIKE '%$busqueda%' ";
+          $search = $this->db->query($sql);
 
-        $result=false;
-        if ($search){
-            $result = true;
+        }else {
+          $search = NULL;
         }
-
-        return $result;
+        return $search;
     }
-    /*Hola Victor  muy buenos videos, estoy haciendo algo similar a POO y MVC del carrito de compras y le quiero poner la paginacion a las tablas usando esta libreria zebra_pagination y sale como se muestra en la imagen:
 
-*/
 }

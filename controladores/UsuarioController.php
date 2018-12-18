@@ -29,7 +29,7 @@ class UsuarioController{
                 $usuario->setEmail($email);
                 $usuario->setDnipassword($dni);
                 $usuario->setEscuela($escuela);
-
+                  var_dump($usuario);
                 //Editar usuario
                 if (isset($_GET['id'])){
                     $id = $_GET['id'];
@@ -41,26 +41,26 @@ class UsuarioController{
                 }
 
                 if($save){
-                    $_SESSION['register'] = "completo"; 
+                    $_SESSION['register'] = "completo";
                 }else{
-                    $_SESSION['register'] = "fallido"; 
+                    $_SESSION['register'] = "fallido";
                 }
             }else{
-                 $_SESSION['register'] = "fallido";  
-            }   
+                 $_SESSION['register'] = "fallido";
+            }
         }else{
-            $_SESSION['register'] = "fallido";            
+            $_SESSION['register'] = "fallido";
         }
         header("Location:".base_url.'usuariocontroller/listadocentes');
     }
-    
+
     public function login(){
         if(isset($_POST)){
             //consulta a la base de datos
             $usuario = new Usuario();
             $usuario->setEmail($_POST['email']);
             $usuario->setDnipassword($_POST['dnipassword']);
-            
+
             $identity = $usuario->login();
 
             //identificar al usuario
@@ -92,31 +92,9 @@ class UsuarioController{
     public function listadocentes(){
         Utils::isAdmin();
         $docente = new Usuario();
-        $docentes = $docente->getAll();
-
-        $numero_elementos =$docentes->num_rows;
-        $numero_elementos_pagina = 10;
-           var_dump($numero_elementos);
-        //numero total de elmentos a paginar
-        $pagination = new Zebra_Pagination();
-        $pagination->navigation_position(isset($_GET['navigation_position'])
-                            && in_array($_GET['navigation_position'],
-                            array('left', 'right')) ?
-                            $_GET['navigation_position'] : 'outside');
-
-
-        $pagination->records($numero_elementos);
-        //numero de elementos por pagina
-        $pagination->records_per_page($numero_elementos_pagina);
-
-        $page = $pagination->get_page();
-        var_dump($page);
-        $empieza_aqui = (($page-1))*$numero_elementos_pagina;
-        $PRO = $docente->listadocentes($empieza_aqui,$numero_elementos_pagina);
+        $PRO = $docente->getAll();
 
         include 'vistas/usuario/listadocentes.php';
-        $pagination->labels('Atras', 'Siguiente');
-        $pagination->render();
     }
     public function editar(){
         Utils::isAdmin();
@@ -154,20 +132,22 @@ class UsuarioController{
     }
     public function  buscar(){
         Utils::isAdmin();
-        $this->listadocentes();
 
         if (isset($_POST['busqueda'])){
             $buscarentradas = $_POST['busqueda'];
             $docentes = new Usuario();
-            //require_once 'vistas/usuario/listadocentes.php';
 
             if (is_numeric($buscarentradas)){
-                $docentes->setDnipassword($buscarentradas);
-                $docentes->buscar();
-                var_dump($docentes);
+                $dni =$docentes->setDnipassword($buscarentradas);
+
+                $buscar = $docentes->search($buscarentradas);
+                $PRO = $docentes->getAll();
+                require_once 'vistas/usuario/busqueda.php';
+
             }else{
-                $docentes->setApellidos($buscarentradas);
-                $docentes->buscar();
+              $buscar = $docentes->search($buscarentradas);
+              $PRO = $docentes->getAll();
+              require_once 'vistas/usuario/busqueda.php';
             }
         }else{
             header("Location:".base_url.'usuariocontroller/listadocentes');
