@@ -71,10 +71,10 @@
               <nav id="menu" class="navbar sticky-top navbar-dark ">
                   <ul class="navbar-nav">
                       <?php if (isset($_SESSION['admin'])):?>
-                          <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/inscripcion&id=<?= $curso->idcurso?>"> <i class="fas fa-info-circle fa-2x"></i></i></a></li>
-                          <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/asistencia&id=<?= $curso->idcurso?>"> <i class="fab fa-autoprefixer fa-2x"></i></a></li>
-                          <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/seguimiento&id=<?= $curso->idcurso?>"> <i class="fas fa-external-link-square-alt fa-2x"></i></a> </li>
-                          <li class="nav-item"><a class="nav-link" href="<?=base_url?>cursocontroller/informe&id=<?= $curso->idcurso?>"><i class="far fa-chart-bar fa-2x"></i></a> </li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Inscripcion" href="<?=base_url?>cursocontroller/inscripcion&id=<?= $curso->idcurso?>"> <i class="fas fa-info-circle fa-2x"></i></i></a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Asistencia" href="<?=base_url?>cursocontroller/asistencia&id=<?= $curso->idcurso?>"> <i class="fab fa-autoprefixer fa-2x"></i></a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Seguimiento" href="<?=base_url?>cursocontroller/seguimiento&id=<?= $curso->idcurso?>"> <i class="fas fa-external-link-square-alt fa-2x"></i></a> </li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Informe" href="<?=base_url?>cursocontroller/informe&id=<?= $curso->idcurso?>"><i class="far fa-chart-bar fa-2x"></i></a> </li>
                       <?php endif; ?>
 
                   </ul>
