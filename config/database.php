@@ -10,13 +10,13 @@ class Database{
         return $database;
     }
     public static function connectmoodle(){
-        $database = new mysqli('localhost'
-                              ,'root'
-                              ,''
+        $databasemoodle = new mysqli('190.119.213.85'
+                              ,'reportes'
+                              ,'reportes'
                               ,'moodle');
-        $database->query("SET NAMES 'utf8'");
+        $databasemoodle->query("SET NAMES 'utf8'");
 
-        return $database;
+        return $databasemoodle;
     }
 }
 

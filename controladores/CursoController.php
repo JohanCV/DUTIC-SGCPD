@@ -3,6 +3,7 @@ require_once 'modelos/curso.php';
 require_once 'modelos/usuario.php';
 require_once 'modelos/usuariocurso.php';
 require_once 'modelos/asistencia.php';
+require_once 'modelos/seguimiento.php';
 
 class CursoController{
     public function index(){
@@ -257,7 +258,7 @@ class CursoController{
       Utils::isAdmin();
       if (isset($_GET['idcp'])) {
         $cursoprueba = $_GET['idcp'];
-        echo "$cursoprueba";
+        var_dump($_GET['idcp']);
         $seguir = new Seguimiento();
         $seguimiento = $seguir->seguimiento($_GET['idcp']);
       }

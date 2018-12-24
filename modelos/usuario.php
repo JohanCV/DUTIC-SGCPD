@@ -72,7 +72,8 @@ class Usuario{
         return $user->fetch_object();
     }
     function getAll(){
-        $sql = "SELECT * FROM usuarios ORDER BY idusu DESC ";
+        $sql = "SELECT escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email FROM `usuarios`
+                INNER JOIN escuela on escuela.ides = usuarios.ides ORDER BY idusu DESC ";
         $users = $this->db->query($sql);
 
         return $users;
@@ -153,7 +154,9 @@ class Usuario{
     public function search($busqueda){
         if (!empty($busqueda)) {
           $dni = $this->getDnipassword();
-          $sql ="SELECT * FROM usuarios WHERE dnipassword  LIKE '%$dni%' || apellidos LIKE '%$busqueda%' || email LIKE '%$busqueda%' ";
+          $sql ="SELECT escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email FROM usuarios
+                 INNER JOIN escuela on escuela.ides = usuarios.ides
+                 WHERE dnipassword  LIKE '%$dni%' || apellidos LIKE '%$busqueda%' || email LIKE '%$busqueda%' ";
           $search = $this->db->query($sql);
 
         }else {

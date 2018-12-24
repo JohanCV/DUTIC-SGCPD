@@ -6,8 +6,7 @@
     <tr>
         <th scope="col">N°</th>
         <th scope="col">ESCUELA</th>
-        <th scope="col">NOMBRE</th>
-        <th scope="col">APELLIDOS</th>
+        <th scope="col">NOMBRE y APELLIDOS</th>
         <th scope="col">EMAIL</th>
         <th scope="col">ACCIONES</th>
     </tr>
@@ -23,9 +22,8 @@
               <?php while ($docente = $buscar->fetch_object() ): ?>
                   <tr>
                       <th scope="row"><?php echo $contador ?></th>
-                      <td><?= $docente->ides; ?></td>
-                      <td><?= $docente->nombre; ?></td>
-                      <td><?= $docente->apellidos; ?></td>
+                      <td><?= $docente->escuela; ?></td>
+                      <td><?= $docente->Docente; ?></td>
                       <td><?= $docente->email; ?></td>
                       <td>
                         <?php if(isset($_SESSION['buscarusercourse']) && $_SESSION['buscarusercourse'] == 'encontrado'):?>

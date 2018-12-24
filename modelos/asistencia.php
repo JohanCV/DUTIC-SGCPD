@@ -1,8 +1,7 @@
 <?php
 class Asistencia{
     private $idfecha;
-    private $idcurso;
-    private $idusu;
+    private $fk_iduc;
     private $estado;
 
     private $db;
@@ -17,18 +16,13 @@ class Asistencia{
     public function setIdfecha($id){
         $this->idusu = $id;
     }
-    public function getIdcurso(){
-        return $this->idcurso;
+    public function getFk_iduc(){
+        return $this->fk_iduc;
     }
-    public function setIdcurso($idcurso){
-        $this->idcurso = $idcurso;
+    public function setFk_iduc($iduc){
+        $this->fk_iduc = $iduc;
     }
-    public function getIdusu(){
-        return $this->idusu;
-    }
-    public function setIdusu($idusu){
-        $this->idusu= $idusu;
-    }
+
     public function getEstado(){
         return $this->estado;
     }
@@ -44,37 +38,30 @@ class Asistencia{
     }
 
     public function getOne($idcurso){
-        $sql = "SELECT fecha.diasemana as idfecha,  curso.nombre as idcurso,
+      /*  $sql = "SELECT fecha.diasemana as idfecha,  curso.nombre as idcurso,
                        usuarios.nombre as idusu, estado
                 FROM asistencia
                 INNER JOIN fecha ON asistencia.idfecha = fecha.idfecha
                 INNER JOIN curso on curso.idcurso = asistencia.idcurso
                 INNER JOIN usuarios on usuarios.idusu = asistencia.idusu
-                WHERE curso.idcurso = '$idcurso'";
+                WHERE curso.idcurso = '$idcurso'";*/
+
+          $sql = "SELECT concat(fecha.dia,'-',fecha.mes,'-20',fecha.anio) as fecha,
+          curso.nombre,
+          concat(usuarios.apellidos,', ',usuarios.nombre) as Docente,
+          asistencia.estado from asistencia LEFT JOIN usuariocurso
+          on asistencia.fk_iduc = usuariocurso.iduc
+          left join curso
+          on curso.idcurso = usuariocurso.idcurso
+          left join usuarios
+          on usuarios.idusu = usuariocurso.idusu
+          left join fecha
+          on asistencia.idfecha = fecha.idfecha
+          where usuariocurso.idcurso = '$idcurso'";
 
 
         $matriculados = $this->db->query($sql);
 
         return $matriculados;
     }
-
-    public function save(){
-      $result = false;
-      $sql = "INSERT INTO curso VALUES (NULL ,
-              '{$this->getNombre()}',
-              '{$this->getNombrecorto()}',
-              '{$this->getHorainicio()}',
-              '{$this->getHorafinal()}',
-              '{$this->getContenido()}',
-              '{$this->getIdprofesor()}')";
-      $save = $this->db->query($sql);
-      echo $this->db->error;
-      die();
-      if ($save) {
-          $result= true;
-      }
-
-      return $result;
-    }
-
 }//fin de clase

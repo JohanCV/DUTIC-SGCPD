@@ -18,9 +18,9 @@
         <?php while ($asis = $cursoasistencia->fetch_object() ): ?>
             <tr>
                 <th scope="row"><?php echo $contador ?></th>
-                <td><?= $asis->idfecha ?></td>
-                <td><?= $asis->idcurso ?></td>
-                <td><?= $asis->idusu ?></td>
+                <td><?= $asis->fecha ?></td>
+                <td><?= $asis->nombre ?></td>
+                <td><?= $asis->Docente ?></td>
                 <td><?= $asis->estado ?></td>
 
             </tr>

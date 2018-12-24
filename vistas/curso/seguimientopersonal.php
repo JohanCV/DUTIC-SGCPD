@@ -6,22 +6,19 @@
     <thead class="thead-light">
     <tr>
         <th scope="col">N°</th>
-        <th scope="col">NOMBRES</th>
-        <th scope="col">CURSO PRUEBA</th>
+        <th scope="col">archivos</th>
+        <th scope="col">tareas</th>
         <th scope="col">TOTAL</th>
     </tr>
     </thead>
 
     <tbody>
     <?php $contador = 1; ?>
-        <?php while ($seguimiento = $cursomatri->fetch_object() ): ?>
+        <?php while ($seguipersonal = $seguimiento->fetch_object() ): var_dump($seguipersonal); ?>
             <tr>
                 <th scope="row"><?php echo $contador ?></th>
-                <td><?= $seguimiento->idusu ?></td>
-                <td><?= $seguimiento->idcursoprueba ?></td>
-                <td><a href="<?=base_url?>cursocontroller/seguimietnopersonal&idcp=<?= $seguimiento->idcursoprueba ?>"
-                   class="btn btn-xs btn-danger">
-                    <i class="fas fa-user-times"></i> VER</a>
+                <td><?= $seguipersonal->archivos?></td>
+                <td><?= $seguipersonal->tareas ?></td>
             </td>
 
             </tr>
