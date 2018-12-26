@@ -10,9 +10,9 @@ class Database{
         return $database;
     }
     public static function connectmoodle(){
-        $databasemoodle = new mysqli('190.119.213.85'
-                              ,'reportes'
-                              ,'reportes'
+        $databasemoodle = new mysqli('localhost'
+                              ,'root'
+                              ,''
                               ,'moodle');
         $databasemoodle->query("SET NAMES 'utf8'");
 

@@ -1,6 +1,6 @@
 <h3>SEGUIMIENTO DOCENTE</h3>
 
-<?php require_once 'vistas/layout/buscar.php'?>
+<?php // require_once 'vistas/layout/buscar.php'?>
 
 <table class="table">
     <thead class="thead-light">
@@ -11,14 +11,14 @@
         <th scope="col">TOTAL</th>
     </tr>
     </thead>
-
+  
     <tbody>
     <?php $contador = 1; ?>
-        <?php while ($seguipersonal = $seguimiento->fetch_object() ): var_dump($seguipersonal); ?>
+        <?php while ($seguipersonal = $seguimiento->fetch_object() ): ?>
             <tr>
                 <th scope="row"><?php echo $contador ?></th>
-                <td><?= $seguipersonal->archivos?></td>
-                <td><?= $seguipersonal->tareas ?></td>
+                <td><?= $seguipersonal->Archivos?></td>
+                <td><?= $seguipersonal->Tareas ?></td>
             </td>
 
             </tr>

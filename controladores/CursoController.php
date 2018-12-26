@@ -271,6 +271,12 @@ class CursoController{
       Utils::isAdmin();
       require_once 'vistas/curso/informe.php';
     }
+
+    public function certificado(){
+      Utils::isAdmin();
+      require_once 'vistas/curso/certificado.php';
+    }
+
     public function recuperacion(){
       Utils::isAdmin();
       require_once 'vistas/curso/recuperacion.php';

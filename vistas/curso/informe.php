@@ -25,7 +25,9 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <a href="<?=base_url?>cursocontroller/certificado"
+                   class="btn btn-xs btn-danger">
+                    <i class="fas fa-user-times"></i> VER</a>
 
             </tr>
             <?php $contador++; //var_dump($docente);?>
