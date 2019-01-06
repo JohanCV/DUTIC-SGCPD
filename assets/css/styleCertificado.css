@@ -1,0 +1,40 @@
+
+body{
+    background-image: url('./img/fondocertificado.png');
+}
+h1{
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+img {
+    margin-right: 50px;
+    margin-left: 60px;
+}
+p{
+    text-align: center;
+}
+#contenido{
+    text-align: center;
+}
+.dutic{
+    float: right;
+}
+.unsa{
+    float: left;
+}
+.firma1{
+    margin-top: 90px;
+    margin-left: 300px;
+    margin-right: 300px;
+    float: left; 
+}
+.firma2{
+    margin-top: 90px;
+    margin-left: 300px;
+    margin-right: 300px;
+    float: right;   
+}
+

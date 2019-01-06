@@ -28,6 +28,7 @@ if(isset($_POST['crear'])){
 }
 ?>
 <form action="" method="POST">
-	<input type="text" placeholder="Titulo" name="titulo" />
+	Nombre: <input type="text" placeholder="Otorgado a" name="titulo" />
+	Curso: <input type="text" placeholder="Curso moodle" name="curso" />
 	<input type="submit" value="Generar pdf" name="crear"/>
 </form>
