@@ -52,7 +52,7 @@ class Usuariocurso{
     }
 
     public function getOne($idcurso){
-        $sql = "SELECT iduc, usuarios.nombre as idusu,  curso.nombre as idcurso, estadoasistencia, cursoprueba.nombrecp as idcursoprueba
+        $sql = "SELECT iduc, concat(usuarios.nombre,' ', usuarios.apellidos ) as idusu,  curso.nombre as idcurso, estadoasistencia, cursoprueba.nombrecp as idcursoprueba
                 FROM usuariocurso
                 INNER JOIN usuarios ON usuariocurso.idusu = usuarios.idusu
                 INNER JOIN curso on curso.idcurso = usuariocurso.idcurso
