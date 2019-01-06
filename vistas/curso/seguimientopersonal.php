@@ -8,10 +8,13 @@
         <th scope="col">N°</th>
         <th scope="col">archivos</th>
         <th scope="col">tareas</th>
-        <th scope="col">TOTAL</th>
+        <th scope="col">cuestionarios</th>
+        <th scope="col">foros</th>
+        <th scope="col">encuesta</th>
+        <th scope="col">nota</th>
     </tr>
     </thead>
-  
+
     <tbody>
     <?php $contador = 1; ?>
         <?php while ($seguipersonal = $seguimiento->fetch_object() ): ?>
@@ -19,6 +22,9 @@
                 <th scope="row"><?php echo $contador ?></th>
                 <td><?= $seguipersonal->Archivos?></td>
                 <td><?= $seguipersonal->Tareas ?></td>
+                <td><?= $seguipersonal->Cuestionarios ?></td>
+                <td><?= $seguipersonal->forum ?></td>
+                <td><?= $seguipersonal->encuesta ?></td>
             </td>
 
             </tr>

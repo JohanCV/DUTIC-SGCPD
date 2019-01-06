@@ -65,6 +65,19 @@ class Usuariocurso{
         return $matriculados;
     }
 
+    public function getOneTeach($nombre){
+        $sql = "SELECT concat(usuarios.nombre,' ', usuarios.apellidos )as docente,iduc
+                FROM usuariocurso
+                INNER JOIN usuarios ON usuariocurso.idusu = usuarios.idusu
+
+                WHERE usuariocurso.iduc = '$nombre'";
+
+
+        $docente = $this->db->query($sql);
+
+        return $docente;
+    }
+
     public function save(){
       $result = false;
       $sql = "INSERT INTO usuariocurso VALUES (NULL ,

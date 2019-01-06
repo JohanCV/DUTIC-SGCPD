@@ -16,11 +16,16 @@ class Seguimiento{
     }
     public function seguimiento($idcp){
       $sql = "SELECT DISTINCT  c.shortname ide, c.fullname ,l.userid, uss.firstname, uss.lastname,
-              uss.email, cats.name as Semestre, cats.path, c.shortname ide ,c.fullname curso,
-              COALESCE( TA.archivos, 0 )as Archivos,COALESCE( TB.tareas, 0 ) as Tareas,
-              COALESCE( TC.cuestionarios, 0 ) as Cuestionarios  ,COALESCE( TD.encuesta, 0 ) as encuesta,
-              COALESCE( TE.etiquetas, 0 ) as etiquetas, COALESCE( TF.chat, 0 ) as chat,
-              COALESCE( TG.forum, 0 ) as forum, COALESCE( TH.glosary, 0 ) as glosary ,
+              uss.email, cats.name as Semestre,
+              cats.path, c.shortname ide ,c.fullname curso,
+              COALESCE( TA.archivos, 0 )as Archivos,
+              COALESCE( TB.tareas, 0 ) as Tareas,
+              COALESCE( TC.cuestionarios, 0 ) as Cuestionarios,
+              COALESCE( TD.encuesta, 0 ) as encuesta,
+              COALESCE( TE.etiquetas, 0 ) as etiquetas,
+              COALESCE( TF.chat, 0 ) as chat,
+              COALESCE( TG.forum, 0 ) as forum,
+              COALESCE( TH.glosary, 0 ) as glosary,
               COALESCE( TH.glosary, 0 ) as  lesson, cats.path
               from mdl_course c
 

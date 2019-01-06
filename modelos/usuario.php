@@ -154,7 +154,7 @@ class Usuario{
     public function search($busqueda){
         if (!empty($busqueda)) {
           $dni = $this->getDnipassword();
-          $sql ="SELECT escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email FROM usuarios
+          $sql ="SELECT escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email, idusu FROM usuarios
                  INNER JOIN escuela on escuela.ides = usuarios.ides
                  WHERE dnipassword  LIKE '%$dni%' || apellidos LIKE '%$busqueda%' || email LIKE '%$busqueda%' ";
           $search = $this->db->query($sql);

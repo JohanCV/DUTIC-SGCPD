@@ -131,17 +131,10 @@ class CursoController{
           $idcurso = isset($_POST['curso'])?$_POST['curso'] : false;
           $estado = isset($_POST['estado'])?$_POST['estado'] : false;
           $idcp= isset($_POST['cursoprueba'])?$_POST['cursoprueba'] : false;
-          var_dump($idusu);
-          var_dump($idcurso);
-          var_dump($estado);
-          var_dump($idcp);
-          echo "entro post";
+
           if ($idusu &&  $idcurso && $estado
               && $idcp) {
-                echo "entro if";
-                var_dump($idusu);
-                var_dump($idcurso);
-                var_dump($idcp);
+
                 $curso =  new Usuariocurso();
                 $curso->setIdusu($idusu);
                 $curso->setIdcurso($idcurso);
@@ -169,6 +162,47 @@ class CursoController{
         $_SESSION['matricula'] = "fallido";
       }
       header("Location:".base_url.'cursocontroller/inscripcion&id='.$idcurso);
+    }
+
+    public function saveasistencia(){
+      echo "entrosm";
+      if (isset($_POST)) {
+          //var_dump($_GET['idoc']);
+          $fecha = isset($_POST['fecha'])?$_POST['fecha'] : false;
+          $usuario = isset($_POST['user'])?$_POST['user'] : false;
+          $estado = isset($_POST['estado'])?$_POST['estado'] : false;
+          var_dump($fecha);
+          var_dump($usuario);
+          var_dump($estado);
+          echo "entro post";
+          if ($fecha &&  $usuario && $estado) {
+                echo "entro if";
+                $asis =  new Asistencia();
+                $asis->setIdfecha($fecha);
+                $asis->setFk_iduc($usuario);
+                $asis->setEstado($estado);
+
+                /*if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $curso->setId($id);
+                    $save = $curso->editar();
+                }else {*/
+                    $save = $asis->save();
+                //}
+                var_dump($save);
+                if ($save) {
+                  $_SESSION['asistencia'] = "completo";
+                }else {
+                  $_SESSION['asistencia'] = "fallido";
+                }
+          }else {
+            $_SESSION['asistencia'] = "fallido";
+          }
+
+      }else {
+        $_SESSION['asistencia'] = "fallido";
+      }
+    //  header("Location:".base_url.'cursocontroller/asistencia');
     }
 
     public function inscripcion(){
@@ -212,11 +246,11 @@ class CursoController{
     public function asistencia(){
       Utils::isAdmin();
 
-      if (isset($_GET['id'])) {
+      if (isset($_GET['idasis'])) {
 
           $buscarusuariocurso = true;
           $asistencia = new Asistencia();
-          $cursoasistencia = $asistencia->getOne($_GET['id']);
+          $cursoasistencia = $asistencia->getOne($_GET['idasis']);
 
           if ($buscarusuariocurso) {
               $_SESSION['buscarusercourse'] = 'encontrado';
@@ -232,6 +266,38 @@ class CursoController{
       return $cursoasistencia;
 
     }
+    public function asistentes(){
+      Utils::isAdmin();
+      if (isset($_GET['id'])) {
+          $buscarusuariocurso = true;
+          $cursomatricula = new Usuariocurso();
+          $cursomatri = $cursomatricula->getOne($_GET['id']);
+
+          if ($buscarusuariocurso) {
+              $_SESSION['buscarusercourse'] = 'encontrado';
+          }else {
+              $_SESSION['buscarusercourse'] = 'noencontrado';
+          }
+      }else {
+
+          if (isset($_GET['idusu'])) {
+            $usuario = new Usuariocurso();
+            $usuario->setIduc($_GET['idusu']);
+            $cursomatri = $usuario->eliminar();
+            header("Location:".base_url.'cursocontroller/listacursos');
+          }
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+      }
+      require_once 'vistas/curso/asistentes.php';
+
+      return $cursomatri;
+    }
+
+    public function marcarasistencia(){
+      Utils::isAdmin();
+      require_once 'vistas/curso/marcarasistencia.php';
+    }
+
     public function seguimiento(){
       Utils::isAdmin();
       if (isset($_GET['id'])) {

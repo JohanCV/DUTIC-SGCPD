@@ -53,4 +53,19 @@ class Utils{
 
         return $curso;
     }
+    public static function showFecha(){
+      require_once 'modelos/fecha.php';
+      $fech = new Fecha();
+      $fechas = $fech->getAll();
+
+      return $fechas;
+    }
+
+    public static function showUser($idusuc){
+      require_once 'modelos/usuariocurso.php';
+      $uc = new Usuariocurso();
+      $usercurso = $uc->getOneTeach($idusuc);
+
+      return $usercurso;
+    }
 }

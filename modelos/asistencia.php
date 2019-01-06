@@ -14,7 +14,7 @@ class Asistencia{
         return $this->idfecha;
     }
     public function setIdfecha($id){
-        $this->idusu = $id;
+        $this->idfecha = $id;
     }
     public function getFk_iduc(){
         return $this->fk_iduc;
@@ -59,9 +59,26 @@ class Asistencia{
           on asistencia.idfecha = fecha.idfecha
           where usuariocurso.idcurso = '$idcurso'";
 
-
         $matriculados = $this->db->query($sql);
 
         return $matriculados;
+    }
+
+    public function save(){
+      $result = false;
+      $sql = "INSERT INTO asistencia VALUES (
+              '{$this->getIdfecha()}',
+              '{$this->getFk_iduc()}',
+              '{$this->getEstado()}')";
+      $save = $this->db->query($sql);
+
+
+      echo $this->db->error;
+      die();
+      if ($save) {
+          $result= true;
+      }
+
+      return $result;
     }
 }//fin de clase

@@ -1,7 +1,9 @@
 <h3>ASISTENCIA</h3>
 
 <?php require_once 'vistas/layout/buscar.php'?>
-
+<a href="<?=base_url?>cursocontroller/asistentes&id=<?=$_GET['idasis']?>"
+   class="btn btn-xs btn-warning">
+    <i class="fas fa-chevron-circle-left fa-1x"></i></a>
 <table class="table">
     <thead class="thead-light">
     <tr>
