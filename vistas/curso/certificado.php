@@ -13,10 +13,10 @@ if(isset($_POST['crear'])){
 	    //include dirname(__FILE__).'/res/example06.php';
 	    $content = ob_get_clean();
 	    
-	    $html2pdf = new Html2Pdf('P','A4', 'es','true','UTF-8');
+	    $html2pdf = new Html2Pdf('L','A4', 'es','true','UTF-8');
 	    $html2pdf->writeHTML($content);
 	    ob_end_clean();
-	    $html2pdf->output('examplek.pdf');
+	    $html2pdf->output('examplek.pdf','I');
 
 	} 
 

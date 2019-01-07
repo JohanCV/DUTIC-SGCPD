@@ -13,8 +13,6 @@
 		<img src="<?=base_url?>assets/img/unsa.jpg"  width="200" height="80" class="unsa">
 		<img src="<?=base_url?>assets/img/logodutic.png"  width="80" height="80" class="dutic">
 		<br><br><br>
-		<br><br><br>
-		<br><br><br>
 		<h1>Certificado de Reconocimiento</h1>
 		<div id="contenido">		
 			<p style="text-align: center;font-size: 20px">
@@ -34,15 +32,19 @@
 			<p>Ciudad de Arequipa, Perú 2019</p>
 			<br><br>
 		</div>
-		<div class="firma1">
-			<hr/>
-			<p>Robert Arisaca Mamani - Director</p>
-		</div>
-
-		<div class="firma2">
-			<hr/>
-			<p>Ana Maria Gutierrez Valdivia - Vicerrectora Académica</p>
-		</div>
-
+		
+		<table>
+			<tr>
+				<td><div id="firma1">
+					<hr/>
+					<p>Robert Arisaca Mamani - Director</p>
+				</div></td>
+				<td><div id="firma2">
+					<hr/>
+					<p>Ana Maria Gutierrez Valdivia - Vicerrectora Académica</p>
+				</div></td>
+			</tr>
+		</table>
+				
 	</body>
 </html>
