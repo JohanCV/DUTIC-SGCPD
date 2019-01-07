@@ -92,8 +92,7 @@ class Seguimiento{
 
               WHERE c.category=cats.id
 
-              AND c.shortname = '$idcp'
-              ORDER BY uss.email";
+              AND c.shortname = '$idcp'";
 
               $seguipers = $this->db->query($sql);
 

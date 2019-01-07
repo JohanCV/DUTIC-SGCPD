@@ -30,7 +30,7 @@
                 <th scope="row"><?php echo $contador ?></th>
                 <td><?= $seguimiento->idusu ?></td>
                 <td><?= $seguimiento->idcursoprueba ?></td>
-                <td><a href="<?=base_url?>cursocontroller/seguimietnopersonal&idcurso=<?= $_GET['id']?>&idcp=<?= $seguimiento->idcursoprueba ?>&iduser=<?= $seguimiento->idusu ?>"
+                <td><a href="<?=base_url?>cursocontroller/seguimietnopersonal&idcurso=<?= $_GET['id']?>&idcp=<?= $seguimiento->idcursoprueba ?>&iduser=<?= $seguimiento->idusu ?>&iducu=<?= $seguimiento->iduc ?>"
                    class="btn btn-xs btn-danger">
                     <i class="fas fa-user-times"></i> seguimiento</a>
                 </td>

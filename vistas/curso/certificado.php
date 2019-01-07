@@ -42,6 +42,6 @@ if(isset($_POST['crear'])){
                required="" autofocus="" >
     <label for="inputNota"></label>
 		<br>
-    <input class="btn btn-lg btn-success"
-                type="submit" value="Generar Certificado" name="crear">
+    <a href="<?=base_url?>cursocontroller/index"><input class="btn btn-lg btn-success"
+                type="submit" value="Generar Certificado" name="crear"></a>
 </form>

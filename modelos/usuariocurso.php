@@ -101,7 +101,8 @@ class Usuariocurso{
         $sql = "DELETE FROM usuariocurso WHERE iduc = {$this->iduc} ";
         $delete = $this->db->query($sql);
         $result = false;
-
+        //echo $this->db->error;
+        //die();
         if ($delete){
             $result = true;
         }

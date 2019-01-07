@@ -64,7 +64,8 @@ class Curso{
     }
 
     public function getAll(){
-        $sql = "SELECT * FROM curso";
+        $sql = "SELECT idcurso, curso.nombre as nombre, horainicio, horafinal, concat(profesor.nombre,' ',profesor.apellido) as idprofesor FROM curso
+                INNER JOIN profesor ON profesor.idprofesor = curso.idprofesor";
         $cursos = $this->db->query($sql);
 
         return $cursos;
@@ -87,8 +88,8 @@ class Curso{
               '{$this->getContenido()}',
               '{$this->getIdprofesor()}')";
       $save = $this->db->query($sql);
-      echo $this->db->error;
-      die();
+      //echo $this->db->error;
+      //die();
       if ($save) {
           $result= true;
       }

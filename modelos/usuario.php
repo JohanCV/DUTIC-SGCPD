@@ -72,7 +72,7 @@ class Usuario{
         return $user->fetch_object();
     }
     function getAll(){
-        $sql = "SELECT escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email FROM `usuarios`
+        $sql = "SELECT idusu, escuela.nombre as escuela, concat(usuarios.apellidos,', ' ,usuarios.nombre) AS Docente, email FROM `usuarios`
                 INNER JOIN escuela on escuela.ides = usuarios.ides ORDER BY idusu DESC ";
         $users = $this->db->query($sql);
 
@@ -85,10 +85,11 @@ class Usuario{
               '{$this->getApellido()}',
               '{$this->getEmail()}',
               '{$this->getDnipassword()}',
-              '{$this->getEscuela()}',
-              'user')";
+              'user',
+              '{$this->getEscuela()}')";
       $save = $this->db->query($sql);
-
+      //echo $this->db->error;
+      //die();
       if ($save) {
           $result= true;
       }
@@ -130,10 +131,11 @@ class Usuario{
               apellidos='{$this->getApellido()}',
               email='{$this->getEmail()}',
               dnipassword='{$this->getDnipassword()}',
-              escuela='{$this->getEscuela()}'
+              ides='{$this->getEscuela()}'
               WHERE idusu={$this->id}";
         $edit = $this->db->query($sql);
-
+        //echo $this->db->error;
+        //die();
         $result=false;
         if ($edit){
             $result = true;

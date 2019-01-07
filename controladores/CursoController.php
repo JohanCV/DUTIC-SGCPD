@@ -5,6 +5,7 @@ require_once 'modelos/usuariocurso.php';
 require_once 'modelos/asistencia.php';
 require_once 'modelos/seguimiento.php';
 require_once 'modelos/seguimientonota.php';
+require_once 'modelos/Informe.php';
 
 class CursoController{
     public function index(){
@@ -327,7 +328,7 @@ class CursoController{
       Utils::isAdmin();
       if (isset($_GET['idcp'])) {
         $cursoprueba = $_GET['idcp'];
-        //var_dump($_GET['idcp']);
+        var_dump($_GET['idcp']);
         $seguir = new Seguimiento();
         $seguimiento = $seguir->seguimiento($_GET['idcp']);
       }
@@ -348,12 +349,14 @@ class CursoController{
               $seguir->setNota($nota);
               $seguimiento = $seguir->editar();
           }
-          if (isset($_GET['idcp'])&& isset($_GET['iduser']) && isset($_GET['idcurso'])) {
+          if (isset($_GET['idcp'])&& isset($_GET['iduser']) && isset($_GET['idcurso']) && isset($_GET['iduc'])) {
             $cursoprueba = $_GET['idcp'];
             $usuario = $_GET['iduser'];
             $curso = $_GET['idcurso'];
-
+            $iduc = $_GET['iduc'];echo "entro if";
+            var_dump($iduc);
             $seguir = new Seguimientonota();
+            $seguir->setIduc($iduc);
             $seguir->setCurso($curso);
             $seguir->setCursoprueba($cursoprueba);
             $seguir->setDocente($usuario);
@@ -381,13 +384,13 @@ class CursoController{
       header("Location:".base_url.'cursocontroller/seguimiento&id='.$_GET['idcurso']);
     }
     public function seguimientonotaedicion(){
-      Utils::isAdmin();echo "entro sn ";
+      Utils::isAdmin();
 
-      if (isset($_POST)) {echo "entro post";
+      if (isset($_POST)) {
           $nota = isset($_POST['nota'])?$_POST['nota'] : false;
-          if (isset($_GET['idsegcal'])) {echo "entro editar";
+          if (isset($_GET['idsegui'])) {
               $seguir = new Seguimientonota();
-              $id = $_GET['idsegcal'];
+              $id = $_GET['idsegui'];
               $seguir->setIdseg($id);
               $seguir->setNota($nota);
               $seguimiento = $seguir->editar();
@@ -403,7 +406,7 @@ class CursoController{
             $_SESSION['segnotaedit'] = "fallido";
           }
 
-      header("Location:".base_url.'cursocontroller/seguimiento&id='.$_GET['idcurso']);
+      header("Location:".base_url.'cursocontroller/seguimientocalificaciones&id='.$_GET['idcurso']);
     }
     public function seguimientocalificaciones(){
       Utils::isAdmin();
@@ -439,7 +442,7 @@ class CursoController{
       if (isset($_GET['id'])){
           $informe = true;
           $id = $_GET['id'];
-          $info = new Asistencia();
+          $info = new Informe();
           $informecertificacion = $info->getInforme($id);
 
       }else{
@@ -452,6 +455,21 @@ class CursoController{
     public function certificado(){
       Utils::isAdmin();
       require_once 'vistas/curso/certificado.php';
+    }
+    public function  buscar(){
+        Utils::isAdmin();
+
+        if (isset($_POST['busqueda'])){
+            $buscarentradas = $_POST['busqueda'];
+            $escuela = new Informe();
+
+              $buscar = $escuela->getInformeSearch($buscarentradas);
+              $informecertificacion = $escuela->getInforme($_GET['idcurso']);
+              require_once 'vistas/usuario/busquedainforme.php';
+
+        }else{
+            header("Location:".base_url.'cursocontroller/listacursos');
+        }
     }
 
     public function recuperacion(){

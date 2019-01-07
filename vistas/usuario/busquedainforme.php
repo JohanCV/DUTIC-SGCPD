@@ -1,6 +1,5 @@
-<h3>INFORME DOCENTE</h3>
-
-<?php require_once 'vistas/layout/buscarinforme.php'?>
+<?php require_once 'vistas/layout/buscarinforme.php';
+?>
 
 <table class="table">
     <thead class="thead-light">

@@ -1,6 +1,7 @@
 <?php
 class Seguimientonota{
     private $idseg;
+    private $iduc;
     private $curso;
     private $cursoprueba;
     private $docente;
@@ -17,6 +18,12 @@ class Seguimientonota{
     }
     public function setIdseg($nc){
         $this->idseg = $nc;
+    }
+    public function getIduc(){
+        return $this->iduc;
+    }
+    public function setIduc($nc){
+        $this->iduc = $nc;
     }
     public function getCurso(){
         return $this->curso;
@@ -46,6 +53,7 @@ class Seguimientonota{
     public function save(){
       $result = false;
       $sql = "INSERT INTO seguimiento VALUES (NULL,
+              '{$this->getIduc()}',
               '{$this->getCurso()}',
               '{$this->getCursoprueba()}',
               '{$this->getDocente()}',
@@ -60,12 +68,12 @@ class Seguimientonota{
     }
 
     public function editar(){
-        $sql = "UPDATE seguimiento SET              
+        $sql = "UPDATE seguimiento SET
               nota='{$this->getNota()}'
               WHERE idseg={$this->idseg}";
         $edit = $this->db->query($sql);
-        echo $this->db->error;
-        die();
+        //echo $this->db->error;
+        //die();
         $result=false;
         if ($edit){
             $result = true;

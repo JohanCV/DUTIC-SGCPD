@@ -16,20 +16,20 @@ class UsuarioController{
         Utils::isAdmin();
         if(isset($_POST)){
             //verificando si los datos existen
-            $nombre=isset($_POST['nombre']) ? $_POST['nombre']:false;
-            $apellidos=isset($_POST['apellidos'])?$_POST['apellidos']:false;
-            $email=isset($_POST['email'])?$_POST['email']:false;
-            $dni=isset($_POST['dni'])?$_POST['dni']:false;
-            $escuela=isset($_POST['escuela'])?$_POST['escuela']:false;
-
-            if($nombre && $apellidos && $email && $dni && $escuela){
+            $nombre=isset($_POST['nombre']) ? $_POST['nombre']:false;var_dump($nombre);
+            $apellidos=isset($_POST['apellidos'])?$_POST['apellidos']:false;var_dump($apellidos);
+            $email=isset($_POST['email'])?$_POST['email']:false;var_dump($email);
+            $dni=isset($_POST['dni'])?$_POST['dni']:false;var_dump($dni);
+            $escuela=isset($_POST['escuelas'])?$_POST['escuelas']:false;var_dump($escuela);
+            echo "entro post ";
+            if($nombre && $apellidos && $email && $dni && $escuela){echo "entro if ";
                 $usuario = new Usuario();
                 $usuario->setNombre($nombre);
                 $usuario->setApellidos($apellidos);
                 $usuario->setEmail($email);
                 $usuario->setDnipassword($dni);
                 $usuario->setEscuela($escuela);
-                  var_dump($usuario);
+                  //var_dump($usuario);
                 //Editar usuario
                 if (isset($_GET['id'])){
                     $id = $_GET['id'];

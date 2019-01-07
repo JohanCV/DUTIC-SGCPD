@@ -56,7 +56,7 @@ class Asistencia{
           $sql = "SELECT concat(fecha.dia,'-',fecha.mes,'-20',fecha.anio) as fecha,
           curso.nombre,
           concat(usuarios.apellidos,', ',usuarios.nombre) as Docente,
-          asistencia.estado from asistencia
+          asistencia.estado, nota from asistencia
           LEFT JOIN usuariocurso
           on asistencia.fk_iduc = usuariocurso.iduc
           left join curso
@@ -87,31 +87,5 @@ class Asistencia{
           $result= true;
       }
       return $result;
-    }
-
-    public function getInforme($idcurso){
-          $sql = "SELECT    escuela.nombre as Escuela, curso.nombre as Curso , seguimiento.docente as DocenteSeguimiento, seguimiento.nota as NotaSeguimiento, asistencia.nota as NotaAsistencia
-          from asistencia
-          LEFT JOIN usuariocurso
-          on asistencia.fk_iduc = usuariocurso.iduc
-
-          LEft join usuarios
-          on usuariocurso.idusu = usuarios.idusu
-
-          LEFT JOIN seguimiento
-          on seguimiento.idcurso = usuariocurso.idcurso
-          AND seguimiento.docente = concat(usuarios.nombre,' ',usuarios.apellidos)
-
-          LEFT JOIN escuela
-          on escuela.ides = usuarios.ides
-
-          LEFT JOIN curso
-          on curso.idcurso = usuariocurso.idcurso
-
-          where seguimiento.idcurso =  '$idcurso' ORDER BY seguimiento.nota DESC ";
-
-        $informe = $this->db->query($sql);
-
-        return $informe;
-    }
+    }  
 }//fin de clase

@@ -12,6 +12,7 @@
         <th scope="col">Curso</th>
         <th scope="col">Docente</th>
         <th scope="col">Asistencia</th>
+        <th scope="col">Nota</th>
     </tr>
     </thead>
 
@@ -24,7 +25,7 @@
                 <td><?= $asis->nombre ?></td>
                 <td><?= $asis->Docente ?></td>
                 <td><?= $asis->estado ?></td>
-
+                <td><?= $asis->nota?></td>
             </tr>
             <?php $contador++; ?>
         <?php endwhile; ?>

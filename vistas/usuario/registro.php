@@ -37,7 +37,7 @@
 
     <div class="form-label-group">
         <input type="text" name="dni" id="inputDNI"
-               class="form-control" placeholder="Ingrese su DNI" required=""
+               class="form-control" placeholder="Ingrese su DNI" 
                >
         <label for="inputDNI"></label>
     </div>
@@ -46,7 +46,7 @@
     <div class="form-label-group">
         <select class="form-control" name="escuelas" id="" >
             <?php while ($esc = $school->fetch_object() ): ?>
-                <option value="<?=isset($usuario) && is_object($usuario)?$usuario->ides: ''; ?>"
+                <option value="<?=$esc->ides;?>"
                   <?= isset($usuario) && is_object($usuario) && $esc->ides == $usuario->ides ? 'selected' : ''; ?>>
                     <?=$esc->nombre?>
                 </option>
