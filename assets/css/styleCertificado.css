@@ -1,6 +1,7 @@
 
 body{
     background-image: url('./img/fondocertificado.png');
+
 }
 h1{
     margin-left: 20px;
@@ -16,6 +17,11 @@ img {
 p{
     text-align: center;
 }
+table{
+    text-align: center;
+    margin-left: 80px;
+    margin-right: 100px;
+}
 #contenido{
     text-align: center;
 }
@@ -25,16 +31,14 @@ p{
 .unsa{
     float: left;
 }
-.firma1{
-    margin-top: 90px;
-    margin-left: 300px;
-    margin-right: 300px;
-    float: left; 
-}
-.firma2{
-    margin-top: 90px;
-    margin-left: 300px;
-    margin-right: 300px;
-    float: right;   
-}
 
+#firma1{
+    margin-top: 60px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+#firma2{
+    margin-top: 60px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
