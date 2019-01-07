@@ -8,7 +8,7 @@
     </div>
 
 <?php endif; ?>
-
+<?php Utils::deleteSesion('segnota'); ?>
 <?php //require_once 'vistas/layout/buscar.php'?>
 <a href="<?=base_url?>cursocontroller/seguimientocalificaciones&id=<?=$_GET['id']?>"
    class="btn btn-xs btn-secondary">

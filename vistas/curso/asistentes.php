@@ -1,8 +1,25 @@
 <h3>MATRICULADOS</h3>
-
+<?php if(isset($_SESSION['asistencia']) && $_SESSION['asistencia'] == 'completo'):?>
+  <div class="alert alert-success" role="alert">
+      <strong>Asistencia Registrada Exitosamente</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+<?php else:  ?>
+  <?php if(isset($_SESSION['asistencia']) && $_SESSION['asistencia'] =='fallido'):?>
+  <div class="alert alert-danger" role="alert">
+      <strong>Asistencia No Registrada, Intentelo nuevamente</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <?php endif; ?>
+<?php endif; ?>
+<?php Utils::deleteSesion('asistencia'); ?>
 <?php require_once 'vistas/layout/buscar.php'?>
 <a href="<?=base_url?>cursocontroller/asistencia&idasis=<?=$_GET['id']?>"
-   class="btn btn-xs btn-warning">
+   class="btn btn-xs btn-secondary">
     <i class="fas fa-user-edit"></i> Asistentes</a>
 <table class="table">
     <thead class="thead-light">
@@ -26,7 +43,7 @@
                 <td><?= $cursomatriculados->idcursoprueba; ?></td>
                 <td><?= $cursomatriculados->estadoasistencia; ?></td>
                 <td>
-                    <a href="<?=base_url?>cursocontroller/marcarasistencia&idusu=<?= $cursomatriculados->iduc ?>"
+                    <a href="<?=base_url?>cursocontroller/marcarasistencia&idusu=<?= $cursomatriculados->iduc ?>&idcurso=<?= $_GET['id'] ?>"
                        class="btn btn-xs btn-danger">
                         <i class="fas fa-user-times"></i> Asistencia</a>
                 </td>

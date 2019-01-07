@@ -24,7 +24,7 @@
                 <td><?= $calificacion->cursoprueba ?></td>
                 <td><?= $calificacion->nota ?></td>
                 <td>
-                    <a href="<?=base_url?>cursocontroller/editarnota&idsegcal=<?= $calificacion->idseg ?>"
+                    <a href="<?=base_url?>cursocontroller/editarnota&idsegcal=<?= $calificacion->idseg ?>&idcurso=<?= $_GET['id']?>"
                        class="btn btn-xs btn-warning">
                         <i class="fas fa-user-edit"></i> Editar</a>
                 </td>

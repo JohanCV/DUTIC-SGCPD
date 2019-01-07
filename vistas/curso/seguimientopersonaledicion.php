@@ -10,7 +10,7 @@
     </div>
 <?php endif; ?>
 
-<form action="<?=base_url?>cursocontroller/seguimientonota&idsegui=<?= $_GET['idsegcal']?>"
+<form action="<?=base_url?>cursocontroller/seguimientonotaedicion&idsegui=<?= $_GET['idsegcal']?>&idcurso=<?= $_GET['idcurso']?>"
     method="POST" class="form-signin">
     <input type="texto" name="nota" id="inputNota"
                class="form-control-sm" placeholder="Ingrese la Nota"

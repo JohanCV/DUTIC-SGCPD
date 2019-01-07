@@ -44,7 +44,7 @@
 
     </tbody>
 </table>
-<form action="<?=base_url?>cursocontroller/seguimientonota&idcup=<?=$_GET['idcp']?>&idusers=<?=$_GET['iduser']?>&idcursos=<?= $_GET['idcurso']?>"
+<form action="<?=base_url?>cursocontroller/seguimientonota&idcp=<?=$_GET['idcp']?>&iduser=<?=$_GET['iduser']?>&idcurso=<?= $_GET['idcurso']?>"
     method="POST" class="form-signin">
     <input type="texto" name="nota" id="inputNota"
                class="form-control-sm" placeholder="Ingrese la Nota"

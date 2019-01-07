@@ -166,23 +166,25 @@ class CursoController{
     }
 
     public function saveasistencia(){
-      echo "entrosm";
+      echo "entrosm ";
       if (isset($_POST)) {
           //var_dump($_GET['idoc']);
           $fecha = isset($_POST['fecha'])?$_POST['fecha'] : false;
           $usuario = isset($_POST['user'])?$_POST['user'] : false;
           $estado = isset($_POST['estado'])?$_POST['estado'] : false;
+          $nota = isset($_POST['nota'])?$_POST['nota'] : false;
           var_dump($fecha);
           var_dump($usuario);
           var_dump($estado);
-          echo "entro post";
+          echo "entro post ";
           if ($fecha &&  $usuario && $estado) {
-                echo "entro if";
+                echo "entro if ";
                 $asis =  new Asistencia();
                 $asis->setIdfecha($fecha);
                 $asis->setFk_iduc($usuario);
                 $asis->setEstado($estado);
-
+                $asis->setNota($nota);
+                var_dump($asis->setNota($nota));
                 /*if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $curso->setId($id);
@@ -203,7 +205,7 @@ class CursoController{
       }else {
         $_SESSION['asistencia'] = "fallido";
       }
-    //  header("Location:".base_url.'cursocontroller/asistencia');
+      header("Location:".base_url.'cursocontroller/asistentes&id='.$_GET['idcurso']);
     }
 
     public function inscripcion(){
@@ -335,11 +337,11 @@ class CursoController{
     }
 
     public function seguimientonota(){
-      Utils::isAdmin();
+      Utils::isAdmin();echo "entro sn ";
 
-      if (isset($_POST)) {
+      if (isset($_POST)) {echo "entro post";
           $nota = isset($_POST['nota'])?$_POST['nota'] : false;
-          if (isset($_GET['idsegcal'])) {
+          if (isset($_GET['idsegcal'])) {echo "entro editar";
               $seguir = new Seguimientonota();
               $id = $_GET['idsegcal'];
               $seguir->setIdseg($id);
@@ -378,6 +380,31 @@ class CursoController{
       }
       header("Location:".base_url.'cursocontroller/seguimiento&id='.$_GET['idcurso']);
     }
+    public function seguimientonotaedicion(){
+      Utils::isAdmin();echo "entro sn ";
+
+      if (isset($_POST)) {echo "entro post";
+          $nota = isset($_POST['nota'])?$_POST['nota'] : false;
+          if (isset($_GET['idsegcal'])) {echo "entro editar";
+              $seguir = new Seguimientonota();
+              $id = $_GET['idsegcal'];
+              $seguir->setIdseg($id);
+              $seguir->setNota($nota);
+              $seguimiento = $seguir->editar();
+          }
+
+              //var_dump($seguimiento);
+            if ($seguimiento) {
+              $_SESSION['segnotaedit'] = "completo";
+            }else {
+              $_SESSION['segnotaedit'] = "fallido";
+            }
+          }else {
+            $_SESSION['segnotaedit'] = "fallido";
+          }
+
+      header("Location:".base_url.'cursocontroller/seguimiento&id='.$_GET['idcurso']);
+    }
     public function seguimientocalificaciones(){
       Utils::isAdmin();
       if (isset($_GET['id'])) {
@@ -409,7 +436,17 @@ class CursoController{
 
     public function informe(){
       Utils::isAdmin();
+      if (isset($_GET['id'])){
+          $informe = true;
+          $id = $_GET['id'];
+          $info = new Asistencia();
+          $informecertificacion = $info->getInforme($id);
+
+      }else{
+          header("Location:".base_url.'cursocontroller/listacursos');
+      }
       require_once 'vistas/curso/informe.php';
+      return $informecertificacion;
     }
 
     public function certificado(){

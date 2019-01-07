@@ -2,12 +2,18 @@
 
 <?php //require_once 'vistas/layout/buscar.php'?>
 
-<form action="<?=base_url?>cursocontroller/saveasistencia" method="post">
-  <?php if(isset($_SESSION['buscarusercourse']) && $_SESSION['buscarusercourse'] == 'encontrado'):?>
+<form action="<?=base_url?>cursocontroller/saveasistencia&idcurso=<?=$_GET['idcurso']?>" method="post">
     <br>
     <label for="">Asistencia si o no:</label>
-    <input class="form-control mr-sm-2" name="estado" placeholder="Ingrese la asistencia"
-           required value="no">
+
+    <select class="form-control" name="estado" id="" >
+        <option value="no">No</option>
+        <option value="si">Si</option>
+    </select>
+    <br>
+    <label for="">Nota</label>
+    <input class="form-control mr-sm-2" name="nota" placeholder="Ingrese la nota"
+           required value="0">
     <label for=""></label>
     <br>
 
@@ -37,9 +43,9 @@
       </select>
     </div>
     <br>
-    <button class="btn btn-lg btn-warning"
+    <button class="btn btn-lg btn-success"
             data-toggle="modal"
             data-target="#exampleModal"
             type="submit">Asistio</button>
-  <?php endif;?>
+
 </form>

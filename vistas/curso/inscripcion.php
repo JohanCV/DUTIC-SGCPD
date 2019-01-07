@@ -6,10 +6,10 @@
     <thead class="thead-light">
     <tr>
         <th scope="col">N°</th>
+        <th scope="col">ESCUELA</th>
         <th scope="col">NOMBRES</th>
         <th scope="col">CURSO</th>
         <th scope="col">CURSO PRUEBA</th>
-        <th scope="col">ESTADO</th>
         <th scope="col">ACCION</th>
     </tr>
     </thead>
@@ -19,10 +19,10 @@
         <?php while ($cursomatriculados = $cursomatri->fetch_object() ):?>
             <tr>
                 <th scope="row"><?php echo $contador ?></th>
+                <td><?= $cursomatriculados->Escuela; ?></td>
                 <td><?= $cursomatriculados->idusu; ?></td>
                 <td><?= $cursomatriculados->idcurso; ?></td>
                 <td><?= $cursomatriculados->idcursoprueba; ?></td>
-                <td><?= $cursomatriculados->estadoasistencia; ?></td>
                 <td>
                     <a href="<?=base_url?>cursocontroller/inscripcion&idusu=<?= $cursomatriculados->iduc ?>"
                        class="btn btn-xs btn-danger">
