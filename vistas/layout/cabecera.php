@@ -23,12 +23,12 @@
     <!--cabecera -->
     <header id="header" class="navbar navbar-light bg-secondary">
             <div id="texto">
-                <h1>DUTIC - SISTEMA DE GESTIÓN DE CURSOS PARA CAPACITAR DOCENTES</h1>
+                <h1>SISTEMA DE GESTIÓN DE CURSOS PARA CAPACITAR DOCENTES</h1>
             </div>
         <?php if (isset($_SESSION['identity'])):?>
             <div id="logout">
                 <a href="<?=base_url?>usuariocontroller/logout">
-                <i class="fas fa-sign-out-alt fa-4x"></i>
+                <i class="fas fa-sign-out-alt fa-3x"></i>
                 </a>
             </div>
         <?php endif; ?>

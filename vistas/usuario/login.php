@@ -13,7 +13,7 @@
 <form action="<?=base_url?>usuariocontroller/login" method="POST" class="form-signin">
                 <div class="text-center mb-4">
                 <img id="imglogo" class="mb-4" src="<?=base_url?>assets/img/logodutic.png" alt="logoDutic" width="100" height="100">
-                <h3 class="h3 mb-3 font-weight-bold">INICIO DE SESION</h3>
+                <h3 class="h3 mb-3 font-weight-bold">INICIO DE SESIÓN</h3>
                 <p>Sistema de Gestión de Cursos para Capacitar a Docentes acerca del 
                     <a href="http://dutic.unsa.edu.pe/aulavirtual">Aula Virtual</a></p>
                 </div>
@@ -28,7 +28,7 @@
                 <label for="inputPassword"></label>
                 </div>  
                 
-                <button class="btn btn-lg btn-primary" type="submit">Iniciar Sesion</button>
+                <button class="btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
 </form>
 
 <?php endif; ?>

@@ -30,8 +30,10 @@ a:focus{
     background: #f0f0f0;
 }
 #texto{
-    width: 90%;text-color: #660e24;
+    text-color: #660e24;
     color: #f0f0f0;
+    float: left;
+    font-weight: 500px;
 }
 h1{
     margin-left: 20px;
@@ -44,9 +46,14 @@ h1{
     float: right;
     width: 4%;
     margin-right: 4%;
+    background-color: #f0f0f0;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 7.5px solid #f0f0f0;
 }
 #texto, #logout{
-    display: inline-block;
+    display: center;
 }
 
 /*menulateral*/
