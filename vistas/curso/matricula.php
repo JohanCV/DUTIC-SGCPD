@@ -8,7 +8,7 @@
            value="si">
     <label for=""></label>
     <?php //$iddocente = $_GET['idoc']?>
-    <input class="form-control mr-sm-2" name="usuario"
+    <input class="form-control mr-sm-2" name="usuario" value="<?=$_GET['idoc']?>"
            placeholder="">
     <label for=""></label>
     <?php $cursoutil = Utils::showCurso();?>

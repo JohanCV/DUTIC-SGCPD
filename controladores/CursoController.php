@@ -82,6 +82,22 @@ class CursoController{
         //uso del return para poder mostrar los cursos antes de iniciar sesion
         return $CURSO;
     }
+    public function usuario(){
+        Utils::isUser();
+        $dentrocurso = true;
+        $curso = new Curso();
+        $CURSO = $curso->getAll();
+
+        if ($dentrocurso) {
+            $_SESSION['dentro'] = 'dentrocurso';
+        }else {
+            $_SESSION['dentro'] = 'noentrocurso';
+        }
+        require_once 'vistas/usuario/docente.php';
+
+        //uso del return para poder mostrar los cursos antes de iniciar sesion
+        return $CURSO;
+    }
 
     public function editar(){
         Utils::isAdmin();
@@ -126,44 +142,85 @@ class CursoController{
     }
 
     public function savematricula(){
+      if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user') {
+        Utils::isUser();
+        if (isset($_POST)) {
+            //var_dump($_GET['idoc']);
+            $idusu = isset($_POST['usuario'])?$_POST['usuario'] : false;
+            $idcurso = isset($_POST['curso'])?$_POST['curso'] : false;
+            $estado = isset($_POST['estado'])?$_POST['estado'] : false;
+            $idcp= isset($_POST['cursoprueba'])?$_POST['cursoprueba'] : false;
 
-      if (isset($_POST)) {
-          //var_dump($_GET['idoc']);
-          $idusu = isset($_POST['usuario'])?$_POST['usuario'] : false;
-          $idcurso = isset($_POST['curso'])?$_POST['curso'] : false;
-          $estado = isset($_POST['estado'])?$_POST['estado'] : false;
-          $idcp= isset($_POST['cursoprueba'])?$_POST['cursoprueba'] : false;
+            if ($idusu &&  $idcurso && $estado
+                && $idcp) {
 
-          if ($idusu &&  $idcurso && $estado
-              && $idcp) {
+                  $curso =  new Usuariocurso();
+                  $curso->setIdusu($idusu);
+                  $curso->setIdcurso($idcurso);
+                  $curso->setEstadoasistencia($estado);
+                  $curso->setIdcursoprueba($idcp);
 
-                $curso =  new Usuariocurso();
-                $curso->setIdusu($idusu);
-                $curso->setIdcurso($idcurso);
-                $curso->setEstadoasistencia($estado);
-                $curso->setIdcursoprueba($idcp);
+                  /*if (isset($_GET['id'])) {
+                      $id = $_GET['id'];
+                      $curso->setId($id);
+                      $save = $curso->editar();
+                  }else {*/
+                      $save = $curso->save();
+                  //}
+                  var_dump($save);
+                  if ($save) {
+                    $_SESSION['matricula'] = "completo";
+                  }else {
+                    $_SESSION['matricula'] = "fallido";
+                  }
+            }else {
+              $_SESSION['matricula'] = "fallido";
+            }
 
-                /*if (isset($_GET['id'])) {
-                    $id = $_GET['id'];
-                    $curso->setId($id);
-                    $save = $curso->editar();
-                }else {*/
-                    $save = $curso->save();
-                //}
-                var_dump($save);
-                if ($save) {
-                  $_SESSION['matricula'] = "completo";
-                }else {
-                  $_SESSION['matricula'] = "fallido";
-                }
-          }else {
-            $_SESSION['matricula'] = "fallido";
-          }
-
+        }else {
+          $_SESSION['matricula'] = "fallido";
+        }
+        header("Location:".base_url.'cursocontroller/inscripcionusuario&id='.$idcurso);
       }else {
-        $_SESSION['matricula'] = "fallido";
+        Utils::isAdmin();
+        if (isset($_POST)) {
+            //var_dump($_GET['idoc']);
+            $idusu = isset($_POST['usuario'])?$_POST['usuario'] : false;
+            $idcurso = isset($_POST['curso'])?$_POST['curso'] : false;
+            $estado = isset($_POST['estado'])?$_POST['estado'] : false;
+            $idcp= isset($_POST['cursoprueba'])?$_POST['cursoprueba'] : false;
+
+            if ($idusu &&  $idcurso && $estado
+                && $idcp) {
+
+                  $curso =  new Usuariocurso();
+                  $curso->setIdusu($idusu);
+                  $curso->setIdcurso($idcurso);
+                  $curso->setEstadoasistencia($estado);
+                  $curso->setIdcursoprueba($idcp);
+
+                  /*if (isset($_GET['id'])) {
+                      $id = $_GET['id'];
+                      $curso->setId($id);
+                      $save = $curso->editar();
+                  }else {*/
+                      $save = $curso->save();
+                  //}
+                  var_dump($save);
+                  if ($save) {
+                    $_SESSION['matricula'] = "completo";
+                  }else {
+                    $_SESSION['matricula'] = "fallido";
+                  }
+            }else {
+              $_SESSION['matricula'] = "fallido";
+            }
+
+        }else {
+          $_SESSION['matricula'] = "fallido";
+        }
+        header("Location:".base_url.'cursocontroller/inscripcion&id='.$idcurso);
       }
-      header("Location:".base_url.'cursocontroller/inscripcion&id='.$idcurso);
     }
 
     public function saveasistencia(){
@@ -223,7 +280,16 @@ class CursoController{
               $_SESSION['buscarusercourse'] = 'noencontrado';
           }
       }else {
-
+        if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user') {
+          Utils::isUser();
+          if (isset($_GET['idusu'])) {
+            $usuario = new Usuariocurso();
+            $usuario->setIduc($_GET['idusu']);
+            $cursomatri = $usuario->eliminar();
+            header("Location:".base_url.'cursocontroller/inscripcionusuario&id='.$_GET['id']);
+          }
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+        }else {
           if (isset($_GET['idusu'])) {
             $usuario = new Usuariocurso();
             $usuario->setIduc($_GET['idusu']);
@@ -231,18 +297,62 @@ class CursoController{
             header("Location:".base_url.'cursocontroller/listacursos');
           }
           $_SESSION['buscarusercourse'] = 'noencontrado';
+        }
       }
       require_once 'vistas/curso/inscripcion.php';
 
       return $cursomatri;
     }
 
+    public function inscripcionusuario(){
+      Utils::isUser();
+
+      if (isset($_GET['id'])) {
+          $buscarusuariocurso = true;
+          $cursomatricula = new Usuariocurso();
+          $cursomatri = $cursomatricula->getOne($_GET['id']);
+
+          if ($buscarusuariocurso) {
+              $_SESSION['buscarusercourse'] = 'encontrado';
+          }else {
+              $_SESSION['buscarusercourse'] = 'noencontrado';
+          }
+      }else {
+
+        if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user') {
+          Utils::isUser();
+          if (isset($_GET['idusu'])) {
+            $usuario = new Usuariocurso();
+            $usuario->setIduc($_GET['idusu']);
+            $cursomatri = $usuario->eliminar();
+            header("Location:".base_url.'cursocontroller/usuario');
+          }
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+        }else {
+          if (isset($_GET['idusu'])) {
+            $usuario = new Usuariocurso();
+            $usuario->setIduc($_GET['idusu']);
+            $cursomatri = $usuario->eliminar();
+            header("Location:".base_url.'cursocontroller/listacursos');
+          }
+          $_SESSION['buscarusercourse'] = 'noencontrado';
+        }
+      }
+      require_once 'vistas/curso/inscripcionusuario.php';
+
+      return $cursomatri;
+    }
+
 
     public function matricular(){
-      Utils::isAdmin();
+      if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user') {
+        Utils::isUser();
+        require_once 'vistas/curso/matricula.php';
+      }else {
+        Utils::isAdmin();
+        require_once 'vistas/curso/matricula.php';
+      }
 
-
-      require_once 'vistas/curso/matricula.php';
     }
 
 

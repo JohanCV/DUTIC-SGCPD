@@ -17,7 +17,7 @@ class Utils{
 
     public static function isUser(){
         if (!isset($_SESSION['identity'])){
-            header("Location:".base_url);
+            header("Location:".base_url/cursocontroller/usuario);
         }else{
             return true;
         }

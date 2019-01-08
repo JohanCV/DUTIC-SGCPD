@@ -88,8 +88,8 @@ class Usuario{
               'user',
               '{$this->getEscuela()}')";
       $save = $this->db->query($sql);
-      //echo $this->db->error;
-      //die();
+      echo $this->db->error;
+      die();
       if ($save) {
           $result= true;
       }
@@ -102,9 +102,10 @@ class Usuario{
         $dnipassword = $this->dnipassword;
 
         //comprobar si exite el usaurio
-        $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+        $sql = "SELECT nombre,apellidos, email, dnipassword, rol FROM usuarios WHERE email = '$email'";
         $login = $this->db->query($sql);
-
+        //echo $this->db->error;
+        //die();
         if($login && $login->num_rows == 1){
             $usuario = $login->fetch_object();
             $dni= $usuario->dnipassword;

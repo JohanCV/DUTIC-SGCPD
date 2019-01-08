@@ -66,21 +66,21 @@ class UsuarioController{
             //identificar al usuario
             if($identity && is_object($identity)){
                 $_SESSION['identity'] = $identity;
-                var_dump($identity);
+                //var_dump($_SESSION['identity']);
                 if ($identity->rol == 'admin'){
-                    $_SESSION['admin'] = true;
+                    $_SESSION['admin'] = true;//echo "administrador";
                     header("Location:".base_url.'cursocontroller/index');
                 }else {
                   if ($identity->rol == 'user') {
-                    $_SESSION['user'] = true;
-                    header("Location:".base_url.'cursocontroller/listacursos');
+                    $_SESSION['user'] = true;//echo "usuario";
+                    header("Location:".base_url.'cursocontroller/usuario');
                   }
                 }
             }else{
                 $_SESSION['error_login']='fallido';
             }
         }
-       header("Location:".base_url.'cursocontroller/index');
+       //header("Location:".base_url.'cursocontroller/index');
     }
 
     public function logout(){
@@ -91,8 +91,11 @@ class UsuarioController{
         if (isset($_SESSION['admin'])){
             unset($_SESSION['admin']);
         }
-        //session_destroy();
-        header("Location:".base_url.'index');
+        if (isset($_SESSION['user'])){
+            unset($_SESSION['user']);
+        }
+        session_destroy();
+        header("Location:".base_url);
     }
     public function listadocentes(){
         Utils::isAdmin();
@@ -101,6 +104,7 @@ class UsuarioController{
 
         include 'vistas/usuario/listadocentes.php';
     }
+
     public function editar(){
         Utils::isAdmin();
 
@@ -155,9 +159,42 @@ class UsuarioController{
               require_once 'vistas/usuario/busqueda.php';
             }
         }else{
-            header("Location:".base_url.'usuariocontroller/listadocentes');
+            if ($_SESSION['identity']->rol == 'user') {
+              header("Location:".base_url.'cursocontroller/usuario');
+            }else {
+                header("Location:".base_url.'usuariocontroller/listadocentes');
+            }
         }
     }
+
+    public function  buscarusuario(){
+        Utils::isUser();
+
+        if (isset($_POST['busqueda'])){
+            $buscarentradas = $_POST['busqueda'];
+            $docentes = new Usuario();
+
+            if (is_numeric($buscarentradas)){
+                $dni =$docentes->setDnipassword($buscarentradas);
+
+                $buscar = $docentes->search($buscarentradas);
+                $PRO = $docentes->getAll();
+                require_once 'vistas/usuario/busqueda.php';
+
+            }else{
+              $buscar = $docentes->search($buscarentradas);
+              $PRO = $docentes->getAll();
+              require_once 'vistas/usuario/busqueda.php';
+            }
+        }else{
+            if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user') {
+              header("Location:".base_url.'cursocontroller/usuario');
+            }else {
+                header("Location:".base_url.'usuariocontroller/listadocentes');
+            }
+        }
+    }
+
 
     public function report(){
         Utils::isAdmin();
