@@ -74,6 +74,11 @@ class UsuarioController{
                   if ($identity->rol == 'user') {
                     $_SESSION['user'] = true;
                     header("Location:".base_url.'cursocontroller/usuario');
+                  }else {
+                    if ($identity->rol == 'secre') {
+                      $_SESSION['secre'] = true;
+                      header("Location:".base_url.'cursocontroller/usuario');
+                    }
                   }
                 }
             }else{

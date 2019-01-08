@@ -548,23 +548,44 @@ class CursoController{
     }
 
     public function informe(){
-      Utils::isAdmin();
-      if (isset($_GET['id'])){
-          $informe = true;
-          $id = $_GET['id'];
-          $info = new Informe();
-          $informecertificacion = $info->getInforme($id);
 
+      if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'secre'){
+        Utils::isUser();
+        if (isset($_GET['id'])){
+            $informe = true;
+            $id = $_GET['id'];
+            $info = new Informe();
+            $informecertificacion = $info->getInforme($id);
+
+        }else{
+            header("Location:".base_url.'cursocontroller/usuario');
+        }
+        require_once 'vistas/curso/informe.php';
       }else{
-          header("Location:".base_url.'cursocontroller/listacursos');
+        Utils::isAdmin();
+        if (isset($_GET['id'])){
+            $informe = true;
+            $id = $_GET['id'];
+            $info = new Informe();
+            $informecertificacion = $info->getInforme($id);
+
+        }else{
+            header("Location:".base_url.'cursocontroller/listacursos');
+        }
+        require_once 'vistas/curso/informe.php';
       }
-      require_once 'vistas/curso/informe.php';
+
       return $informecertificacion;
     }
 
     public function certificado(){
-      Utils::isAdmin();
-      require_once 'vistas/curso/certificado.php';
+      if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'secre'){
+        Utils::isUser();
+        require_once 'vistas/curso/certificado.php';
+      }else {
+        Utils::isAdmin();
+        require_once 'vistas/curso/certificado.php';
+      }
     }
     public function  buscar(){
         Utils::isAdmin();

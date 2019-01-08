@@ -9,7 +9,11 @@
                   <ul class="navbar-nav">
                       <?php if (isset($_SESSION['user'])):?>
                           <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Inscripcion" href="<?=base_url?>cursocontroller/inscripcionusuario&id=<?= $curso->idcurso?>"> <i class="fas fa-info-circle fa-2x"></i></i></a></li>
-                          <?php endif; ?>
+                      <?php else: ?>
+                        <?php if (isset($_SESSION['secre']) && $_SESSION['identity']->rol == 'secre'):?>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tooltip" data-placement="top" title="Informe" href="<?=base_url?>cursocontroller/informe&id=<?= $curso->idcurso?>"><i class="far fa-chart-bar fa-2x"></i></a> </li>
+                        <?php endif; ?>
+                      <?php endif; ?>
 
                   </ul>
               </nav>

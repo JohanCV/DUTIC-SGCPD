@@ -21,7 +21,7 @@
                 <?= $_SESSION['identity']->apellidos ?>
             </strong>
         </div>
-        <?php if (isset($_SESSION['identity']->rol) && $_SESSION['identity']->rol == 'user'):?>
+        <?php if (isset($_SESSION['identity']->rol) && $_SESSION['identity']->rol == 'user' || $_SESSION['identity']->rol == 'secre'):?>
           <ul>
               <li><a href="<?=base_url?>cursocontroller/usuario" name="clickcursos">
                       <i class="fas fa-chalkboard-teacher"></i> CURSOS</a></li>

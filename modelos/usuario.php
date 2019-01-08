@@ -88,8 +88,8 @@ class Usuario{
               'user',
               '{$this->getEscuela()}')";
       $save = $this->db->query($sql);
-      echo $this->db->error;
-      die();
+      //echo $this->db->error;
+      //die();
       if ($save) {
           $result= true;
       }
