@@ -102,7 +102,7 @@ class Usuario{
         $dnipassword = $this->dnipassword;
 
         //comprobar si exite el usaurio
-        $sql = "SELECT nombre,apellidos, email, dnipassword, rol FROM usuarios WHERE email = '$email'";
+        $sql = "SELECT idusu, nombre,apellidos, email, dnipassword, rol FROM usuarios WHERE email = '$email'";
         $login = $this->db->query($sql);
         //echo $this->db->error;
         //die();

@@ -23,11 +23,13 @@
                 <td><?= $cursomatriculados->idusu; ?></td>
                 <td><?= $cursomatriculados->idcurso; ?></td>
                 <td><?= $cursomatriculados->idcursoprueba; ?></td>
-                <td>
-                    <a href="<?=base_url?>cursocontroller/inscripcionusuario&idusu=<?= $cursomatriculados->iduc ?>"
-                       class="btn btn-xs btn-danger">
-                        <i class="fas fa-user-times"></i> Desmatricular</a>
-                </td>
+                <?php if (isset($_SESSION['identity']) && $_SESSION['identity']->rol == 'user' && $_SESSION['identity']->nombre.' '.$_SESSION['identity']->apellidos == $cursomatriculados->idusu) :?>
+                  <td>
+                      <a href="<?=base_url?>cursocontroller/inscripcionusuario&idusu=<?= $cursomatriculados->iduc ?>"
+                         class="btn btn-xs btn-danger">
+                          <i class="fas fa-user-times"></i> Desmatricular</a>
+                  </td>
+                <?php endif; ?>
             </tr>
             <?php $contador++; ?>
         <?php endwhile; ?>

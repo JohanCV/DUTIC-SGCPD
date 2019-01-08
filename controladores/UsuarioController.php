@@ -72,7 +72,7 @@ class UsuarioController{
                     header("Location:".base_url.'cursocontroller/index');
                 }else {
                   if ($identity->rol == 'user') {
-                    $_SESSION['user'] = true;//echo "usuario";
+                    $_SESSION['user'] = true;
                     header("Location:".base_url.'cursocontroller/usuario');
                   }
                 }
