@@ -158,7 +158,7 @@ h1{
 /*contenido*/
 #contenido{
     width: 79.2%;
-    min-height: 1000px;
+    min-height: 800px;
     float: right;
     border-top:solid 2px #f0f0f0;
     box-shadow: -5px -1px 15px #ddd;
@@ -195,7 +195,7 @@ h1{
 #footer p{
     font-size: 120%;
     font-weight: bold;
-    margin-left: 40%;
+    margin-left: 60%;
     margin-top: 10px;
 }
 /*Pagina de Inicio de sesion*/

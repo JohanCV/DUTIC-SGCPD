@@ -1,5 +1,8 @@
 <?php if (isset($_SESSION['identity'])):?>
   <h3> CURSOS DE CAPACITACION</h3>
+<?php else: ?>
+<?php $portada= new UsuarioController();
+    $portada->portada();?>
 <?php endif; ?>
 <?php if(isset($_SESSION['edicion']) && $_SESSION['edicion']=='completo'):?>
     <div class="alert alert-success" role="alert">

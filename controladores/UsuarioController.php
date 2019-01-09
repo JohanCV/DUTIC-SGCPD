@@ -205,8 +205,9 @@ class UsuarioController{
         Utils::isAdmin();
         require_once 'vistas/reportes/reportes.php';
     }
-
-
+    public function portada(){
+        require_once 'vistas/layout/portada.php';
+    }
 }//fin class
 
 ?>
